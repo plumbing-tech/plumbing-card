@@ -25,7 +25,7 @@
         .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
         .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
 
-        /* POPUP PRICE BOX MODAL WINDOW */
+        /* POPUP DETAILS WINDOW MODAL */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); padding: 20px; box-sizing: border-box; }
         .modal-content { background-color: white; margin: 15% auto; padding: 25px; border-radius: 15px; max-width: 450px; border-top: 8px solid #28a745; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
         .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; margin-top: -15px; }
@@ -53,73 +53,73 @@
     <!-- CATEGORY FILTERS -->
     <div class="filter-container">
         <button class="filter-btn active" onclick="filterGallery(event, 'all')">✨ All</button>
-        <button class="filter-btn" onclick="filterGallery(event, 'tables')">🪑 Tables</button>
+        <button class="filter-btn" onclick="filterGallery(event, 'tables')">🪑 Tables & Chairs</button>
         <button class="filter-btn" onclick="filterGallery(event, 'bedroom')">🛏️ Bedrooms</button>
     </div>
 
     <!-- MAIN COMPREHENSIVE IMAGE PORTFOLIO GRID -->
     <div class="gallery">
-        <!-- Tables Category -->
-        <div class="gallery-item tables" onclick="openPriceModal('Bespoke Table 1', '$350 - $750', '🪑 Custom Wood Table', '7 - 12 Working Days')">
-            <img src="chair1.jpg" onerror="this.src='table1.jpeg';" alt="Custom Carpentry Setup">
-            <p>Bespoke Carpentry Work</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+        <!-- Tables Category - Mapped directly to your chair1.jpg asset seen on GitHub dashboard -->
+        <div class="gallery-item tables" onclick="openPriceModal('Bespoke Wood Chair', '$120 - $250', '🪑 Fine Finish Carpentry', '5 - 8 Working Days')">
+            <img src="chair1.jpg" alt="Custom Wood Chair Design">
+            <p>Bespoke Chair Model</p>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
-        <!-- Bedroom Category (Every item linked straight to your layout screen) -->
+        <!-- Bedroom Category - Mapped directly to your real main directory file layout -->
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 1', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(1).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 1</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
         
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 2', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-            <!-- Tries .jpeg and has an auto fallback loop to grab the broken .jpe line extension link -->
+            <!-- Includes automatic extension fixes for file system anomalies -->
             <img src="bedroom1(3).jpeg" onerror="this.src='bedroom1(3).jpe';" alt="Bedroom Furniture">
             <p>Master Bedroom Set 2</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 3', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(4).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 3</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 4', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(5).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 4</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 5', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(6).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 5</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 6', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(7).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 6</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 7', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(8).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 7</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 8', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(9).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 8</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 9', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(10).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 9</p>
-            <span class="click-hint">💰 View Est. Cost</span>
+            <span class="click-hint">💰 View Details & Cost</span>
         </div>
     </div>
 
@@ -150,12 +150,10 @@
     </div>
 </div>
 
-<!-- SCRIPTS -->
+<!-- ALL CODES AND FUNCTIONS -->
 <script>
 function filterGallery(evt, category) {
     let buttons = document.getElementsByClassName('filter-btn');
     for (let button of buttons) { button.classList.remove('active'); }
     evt.currentTarget.classList.add('active');
 
-    let items = document.getElementsByClassName('gallery-item');
-    for (let item of items) {
