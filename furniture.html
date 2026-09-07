@@ -39,10 +39,10 @@
     
     <!-- CATEGORY FILTERS -->
     <div class="filter-container">
-        <button class="filter-btn active" onclick="filterGallery('all')">✨ All</button>
-        <button class="filter-btn" onclick="filterGallery('tables')">🪑 Tables</button>
-        <button class="filter-btn" onclick="filterGallery('chairs')">🪘 Chairs</button>
-        <button class="filter-btn" onclick="filterGallery('tv')">📺 TV Units</button>
+        <button class="filter-btn active" onclick="filterGallery(event, 'all')">✨ All</button>
+        <button class="filter-btn" onclick="filterGallery(event, 'tables')">🪑 Tables</button>
+        <button class="filter-btn" onclick="filterGallery(event, 'chairs')">🪘 Chairs</button>
+        <button class="filter-btn" onclick="filterGallery(event, 'tv')">📺 TV Units</button>
     </div>
 
     <!-- PHOTO GALLERY -->
@@ -83,15 +83,15 @@
 
 <!-- FILTER SCRIPT -->
 <script>
-function filterGallery(category) {
-    // Update active button styling
+function filterGallery(evt, category) {
+    // Correctly apply active button styling using the passed event
     let buttons = document.getElementsByClassName('filter-btn');
     for (let button of buttons) {
         button.classList.remove('active');
     }
-    event.currentTarget.classList.add('active');
+    evt.currentTarget.classList.add('active');
 
-    // Show/Hide items based on class
+    // Show/Hide items based on class categories
     let items = document.getElementsByClassName('gallery-item');
     for (let item of items) {
         if (category === 'all') {
