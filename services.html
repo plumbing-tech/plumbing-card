@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services & Gallery</title>
+    <title>Sely's Plumbing Services & Gallery</title>
     <style>
         body { font-family: Arial, sans-serif; background: #f4f6f9; padding: 20px; color: #333; }
         .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
@@ -10,12 +10,10 @@
         .service-list { list-style: none; padding: 0; }
         .service-item { background: #e9ecef; padding: 12px; margin: 8px 0; border-radius: 6px; font-weight: bold; }
         
-        /* Button Styles */
         .btn { display: block; text-align: center; background: #007bff; color: white; padding: 15px; margin: 15px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; }
         .btn-emergency { background: #dc3545; }
         .btn-back { background: #6c757d; padding: 12px; margin-top: 25px; font-size: 16px; }
         
-        /* Gallery Styles */
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
         .gallery img { width: 100%; border-radius: 8px; border: 1px solid #ccc; height: 150px; object-fit: cover; display: block; }
     </style>
@@ -32,17 +30,16 @@
         <li class="service-item">🚨 24/7 Emergency Services</li>
     </ul>
 
-    <!-- RESTORED PLUMBING CONTACT BUTTONS -->
     <a href="tel:+96170100177" class="btn btn-emergency">📞 Call For Emergency</a>
     <a href="sms:+96170100177" class="btn">💬 Text Me Directly</a>
     <a href="mailto:selykeyrouz22@gmail.com" class="btn" style="background: #28a745;">✉️ Email for a Quote</a>
 
     <h2>Our Recent Work</h2>
     <div class="gallery">
-        <!-- Kept your clean working repository pictures -->
-        <img src="work1.jpg" alt="Professional Pipe Maintenance Layout">
-        <img src="work2.jpg" alt="Under Sink Leak Fix and Tools">
-        <img src="work3.jpg" alt="Commercial Fixture & Valve Repair">
+        <!-- Automatically checks both folders to guarantee the images show up -->
+        <img src="work1.jpeg" onerror="this.src='eliee/work1.jpeg'; this.onerror=function(){this.src='work1.jpg'; this.onerror=function(){this.src='eliee/work1.jpg';}};" alt="Plumbing Work 1">
+        <img src="work2.jpeg" onerror="this.src='eliee/work2.jpeg'; this.onerror=function(){this.src='work2.jpg'; this.onerror=function(){this.src='eliee/work2.jpg';}};" alt="Plumbing Work 2">
+        <img src="work3.jpeg" onerror="this.src='eliee/work3.jpeg'; this.onerror=function(){this.src='work3.jpg'; this.onerror=function(){this.src='eliee/work3.jpg';}};" alt="Plumbing Work 3">
     </div>
 
     <a href="index.html" class="btn btn-back">⬅️ Back to Main Gateway</a>
