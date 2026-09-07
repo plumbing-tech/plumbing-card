@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sely & Elie - Pricing Estimator</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #fbf8f5; padding: 20px; color: #333; }
+        .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-top: 8px solid #28a745; }
+        h1 { color: #28a745; text-align: center; margin-bottom: 5px; }
+        .subtitle { text-align: center; color: #666; margin-top: 0; font-style: italic; }
+        .price-box { background: #e8f5e9; padding: 20px; border-radius: 10px; text-align: center; margin: 20px 0; border: 1px dashed #28a745; }
+        .price-value { font-size: 32px; font-weight: bold; color: #2e7d32; }
+        .details-list { list-style: none; padding: 0; margin: 20px 0; }
+        .details-item { padding: 12px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+        .details-item strong { color: #555; }
+        .action-btn { display: block; text-align: center; background: #28a745; color: white; padding: 14px; margin: 15px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
+        .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; text-decoration: none; border-radius: 8px; font-weight: bold; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="itemName">Furniture Item</h1>
+    <p class="subtitle">Official Workshop Price Estimate</p>
+    
+    <div class="price-box">
+        <p style="margin:0; font-weight:bold; color:#555;">Estimated Base Cost</p>
+        <div class="price-value" id="itemPrice">$0.00</div>
+        <p style="margin:5px 0 0 0; font-size:12px; color:#666;">*Final quote depends on dimensions & material choice</p>
+    </div>
+
+    <h2>Bespoke Specifications</h2>
+    <ul class="details-list">
+        <li class="details-item"><strong>Category Type:</strong> <span id="itemCategory">-</span></li>
+        <li class="details-item"><strong>Standard Turnaround:</strong> <span id="itemTime">10-15 Days</span></li>
+        <li class="details-item"><strong>Available Materials:</strong> <span>Oak, Walnut, Beech, Pine</span></li>
+        <li class="details-item"><strong>Craftsman:</strong> <span>Elie (03174225)</span></li>
+    </ul>
+
+    <!-- Quick action channels linking back to Elie -->
+    <a href="tel:+96103174225" class="action-btn">📞 Call to Confirm Order</a>
+    <a id="smsLink" href="sms:+96103174225" class="action-btn" style="background:#007bff;">💬 Text Design Specifications</a>
+    
+    <a href="furniture.html" class="btn-back">⬅️ Return to Gallery</a>
+</div>
+
+<script>
+    // Read the product data from the URL parameter strings automatically
+    const urlParams = new URLSearchParams(window.location.search);
+    const item = urlParams.get('item') || 'Custom Project';
+    
+    document.getElementById('itemName').innerText = item;
+    
+    // Smart custom calculator configurations mapping dynamically to your items
+    if(item.toLowerCase().includes('table')) {
+        document.getElementById('itemCategory').innerText = '🪑 Custom Wood Table';
+        document.getElementById('itemPrice').innerText = '$350 - $750';
+        document.getElementById('itemTime').innerText = '7 - 12 Working Days';
+        document.getElementById('smsLink').href = "sms:+96103174225?body=Hi Elie, I am interested in a quote for " + item;
+    } else if(item.toLowerCase().includes('bedroom')) {
+        document.getElementById('itemCategory').innerText = '🛏️ Premium Bedroom Joinery';
+        document.getElementById('itemPrice').innerText = '$1,200 - $3,500';
+        document.getElementById('itemTime').innerText = '21 - 30 Working Days';
+        document.getElementById('smsLink').href = "sms:+96103174225?body=Hi Elie, I am interested in a custom order for " + item;
+    } else {
+        document.getElementById('itemCategory').innerText = '🛠️ Custom Carpentry';
+        document.getElementById('itemPrice').innerText = 'Contact for Quote';
+    }
+</script>
+
+</body>
+</html>
