@@ -17,7 +17,7 @@
         .folder-icon { font-size: 26px; }
         .back-folder-btn { display: none; background: #8b5a2b; color: white; border: none; padding: 12px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 15px; font-size: 14px; width: 100%; text-align: center; -webkit-tap-highlight-color: transparent; }
 
-        /* Gallery Sections (Hidden by default until folder is opened) */
+        /* Gallery Sections */
         .category-section { display: none; }
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
         .gallery-item { display: block; text-decoration: none; color: inherit; cursor: pointer; background: #fff; padding-bottom: 5px; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); -webkit-tap-highlight-color: transparent; }
@@ -29,7 +29,7 @@
         .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
         .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
 
-        /* THE POP-UP PRICE WINDOW (MODAL) */
+        /* POPUP WINDOW MODAL */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); padding: 20px; box-sizing: border-box; }
         .modal-content { background-color: white; margin: 15% auto; padding: 25px; border-radius: 15px; max-width: 450px; border-top: 8px solid #28a745; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
         .close-btn { color: #aaa; float: right; font-size: 32px; font-weight: bold; cursor: pointer; margin-top: -15px; -webkit-tap-highlight-color: transparent; }
@@ -52,10 +52,10 @@
     <a href="tel:+96103174225" class="action-btn">📞 Call Elie For Orders</a>
     <a href="sms:+96103174225" class="action-btn" style="background: #007bff;">💬 Text Elie Details</a>
 
-    <!-- FOLDER NAVIGATION SYSTEM BACK BUTTON -->
+    <!-- FOLDER BACK BUTTON -->
     <button class="back-folder-btn" id="backFolderBtn" onclick="closeFolder()">📁 Close Folder & Go Back</button>
 
-    <!-- CLOSED FOLDERS CONTAINER (Main Screen Layout View) -->
+    <!-- CLOSED FOLDERS SELECTION DIRECTORY -->
     <div class="folder-grid" id="mainFolderGrid">
         <div class="folder-card" onclick="openFolder('tables')">
             <span class="folder-icon">🪑</span> <span>Tables Folder</span>
@@ -68,7 +68,7 @@
         </div>
     </div>
 
-    <!-- 1. TABLES FILE GALLERY -->
+    <!-- 1. TABLES CATALOGUE -->
     <div class="category-section" id="folder-tables">
         <h2>🪑 Tables Catalogue</h2>
         <div class="gallery">
@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    <!-- 2. TV UNITS FILE GALLERY -->
+    <!-- 2. TV UNITS CATALOGUE -->
     <div class="category-section" id="folder-tv">
         <h2>📺 TV Units Catalogue</h2>
         <div class="gallery">
@@ -92,7 +92,7 @@
         </div>
     </div>
 
-    <!-- 3. BEDROOMS FILE GALLERY (All 9 items organized with custom pop-ups) -->
+    <!-- 3. BEDROOMS CATALOGUE -->
     <div class="category-section" id="folder-bedroom">
         <h2>🛏️ Bedrooms Catalogue</h2>
         <div class="gallery">
@@ -136,3 +136,4 @@
                 <p>Master Bedroom Set 8</p>
                 <span class="click-hint">🔎 Tap For Price</span>
             </div>
+            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 9', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
