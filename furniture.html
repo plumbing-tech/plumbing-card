@@ -48,12 +48,16 @@
     <div class="gallery">
         <!-- Tables Category -->
         <div class="gallery-item tables">
-            <!-- Points to your eliee folder layout or falls back to standard file systems -->
-            <img src="eliee/table1.jpeg" onerror="this.src='table1.jpeg'; this.onerror=function(){this.src='table.jpeg';}" alt="Custom Table">
-            <p>Bespoke Table</p>
+            <!-- Tries to read from the eliee subfolder or standard root filenames -->
+            <img src="eliee/table1.jpeg" onerror="this.src='table1(1).jpeg'; this.onerror=function(){this.src='table1.jpeg'; this.onerror=function(){this.src='table.jpeg';}};" alt="Custom Table 1">
+            <p>Bespoke Dining Table</p>
+        </div>
+        <div class="gallery-item tables">
+            <img src="eliee/table2.jpeg" onerror="this.src='table1(2).jpeg'; this.onerror=function(){this.src='table2.jpeg';};" alt="Custom Table 2">
+            <p>Wooden Coffee Table</p>
         </div>
 
-        <!-- Bedroom Category (Matched perfectly to your real filenames from the image) -->
+        <!-- Bedroom Category -->
         <div class="gallery-item bedroom">
             <img src="bedroom1(1).jpeg" alt="Bedroom Set 1">
             <p>Master Bedroom Set</p>
