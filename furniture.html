@@ -25,7 +25,7 @@
         .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
         .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
 
-        /* POPUP DETAILS WINDOW MODAL */
+        /* POPUP MODAL STYLES (RESTORED & FIXED) */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); padding: 20px; box-sizing: border-box; }
         .modal-content { background-color: white; margin: 15% auto; padding: 25px; border-radius: 15px; max-width: 450px; border-top: 8px solid #28a745; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
         .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; margin-top: -15px; }
@@ -57,16 +57,16 @@
         <button class="filter-btn" onclick="filterGallery(event, 'bedroom')">🛏️ Bedrooms</button>
     </div>
 
-    <!-- MAIN COMPREHENSIVE IMAGE PORTFOLIO GRID -->
+    <!-- MAIN GRID CONTAINER -->
     <div class="gallery">
-        <!-- Tables Category - Mapped directly to your chair1.jpg asset seen on GitHub dashboard -->
+        <!-- Tables Category - Mapped exactly to your existing chair1.jpg layout asset -->
         <div class="gallery-item tables" onclick="openPriceModal('Bespoke Wood Chair', '$120 - $250', '🪑 Fine Finish Carpentry', '5 - 8 Working Days')">
             <img src="chair1.jpg" alt="Custom Wood Chair Design">
             <p>Bespoke Chair Model</p>
             <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
-        <!-- Bedroom Category - Mapped directly to your real main directory file layout -->
+        <!-- Bedroom Categories - Pointing directly to your active repository root files -->
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 1', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(1).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 1</p>
@@ -74,7 +74,7 @@
         </div>
         
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 2', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-            <!-- Includes automatic extension fixes for file system anomalies -->
+            <!-- Automated fallback mechanism to secure the bedroom1(3).jpe typo extension on line 4 of your folder dashboard -->
             <img src="bedroom1(3).jpeg" onerror="this.src='bedroom1(3).jpe';" alt="Bedroom Furniture">
             <p>Master Bedroom Set 2</p>
             <span class="click-hint">💰 View Details & Cost</span>
@@ -150,7 +150,7 @@
     </div>
 </div>
 
-<!-- ALL CODES AND FUNCTIONS -->
+<!-- COMPREHENSIVE CONTROL LOGIC -->
 <script>
 function filterGallery(evt, category) {
     let buttons = document.getElementsByClassName('filter-btn');
