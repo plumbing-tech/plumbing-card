@@ -9,11 +9,9 @@
         h1, h2 { color: #0056b3; text-align: center; }
         .service-list { list-style: none; padding: 0; }
         .service-item { background: #e9ecef; padding: 12px; margin: 8px 0; border-radius: 6px; font-weight: bold; }
-        
         .btn { display: block; text-align: center; background: #007bff; color: white; padding: 15px; margin: 15px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; }
         .btn-emergency { background: #dc3545; }
-        .btn-back { background: #6c757d; padding: 12px; margin-top: 25px; font-size: 16px; }
-        
+        .btn-back { background: #6c757d; padding: 12px; margin-top: 25px; font-size: 16px; color: white; }
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
         .gallery img { width: 100%; border-radius: 8px; border: 1px solid #ccc; height: 150px; object-fit: cover; display: block; }
     </style>
@@ -36,10 +34,9 @@
 
     <h2>Our Recent Work</h2>
     <div class="gallery">
-        <!-- Automatically checks both folders to guarantee the images show up -->
-        <img src="work1.jpeg" onerror="this.src='eliee/work1.jpeg'; this.onerror=function(){this.src='work1.jpg'; this.onerror=function(){this.src='eliee/work1.jpg';}};" alt="Plumbing Work 1">
-        <img src="work2.jpeg" onerror="this.src='eliee/work2.jpeg'; this.onerror=function(){this.src='work2.jpg'; this.onerror=function(){this.src='eliee/work2.jpg';}};" alt="Plumbing Work 2">
-        <img src="work3.jpeg" onerror="this.src='eliee/work3.jpeg'; this.onerror=function(){this.src='work3.jpg'; this.onerror=function(){this.src='eliee/work3.jpg';}};" alt="Plumbing Work 3">
+        <img src="work1.jpeg" onerror="this.src='work1.jpg';" alt="Plumbing Work 1">
+        <img src="work2.jpeg" onerror="this.src='work2.jpg';" alt="Plumbing Work 2">
+        <img src="work3.jpeg" onerror="this.src='work3.jpg';" alt="Plumbing Work 3">
     </div>
 
     <a href="index.html" class="btn btn-back">⬅️ Back to Main Gateway</a>
