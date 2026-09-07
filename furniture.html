@@ -1,141 +1,203 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elie's Custom Furniture & Carpentry</title>
+    <title>Furniture Gallery Viewer</title>
     <style>
-        body { font-family: Arial, sans-serif; background: #fbf8f5; padding: 20px; color: #333; }
-        .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-top: 8px solid #8b5a2b; margin-bottom: 30px; }
-        h1, h2 { color: #8b5a2b; text-align: center; }
-        p.subtitle { text-align: center; margin-top: -10px; color: #666; font-style: italic; }
-        
-        /* Directory Folder Elements */
-        .folder-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin: 20px 0; }
-        .folder-card { background: #fffdf9; border: 2px solid #dfc4af; border-radius: 12px; padding: 20px; cursor: pointer; text-align: left; position: relative; font-weight: bold; font-size: 18px; color: #5c3a1a; display: flex; align-items: center; gap: 15px; box-shadow: 0 3px 6px rgba(0,0,0,0.05); transition: 0.2s; -webkit-tap-highlight-color: transparent; }
-        .folder-card:hover { background: #fdf6ed; transform: translateY(-2px); }
-        .folder-card::before { content: ''; position: absolute; top: -10px; left: 15px; width: 45px; height: 10px; background: #dfc4af; border-radius: 4px 4px 0 0; }
-        .folder-icon { font-size: 26px; }
-        .back-folder-btn { display: none; background: #8b5a2b; color: white; border: none; padding: 12px 16px; border-radius: 8px; font-weight: bold; cursor: pointer; margin-bottom: 15px; font-size: 14px; width: 100%; text-align: center; -webkit-tap-highlight-color: transparent; }
+        /* Base Container & Grid Styling mimicking your UI */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fcf8f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery-item {
+            background: #fff;
+            border: 1px dashed #dae1e7;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .gallery-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .folder-title {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .click-hint {
+            font-size: 12px;
+            color: #888;
+        }
 
-        /* Gallery Sections */
-        .category-section { display: none; }
-        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .gallery-item { display: block; text-decoration: none; color: inherit; cursor: pointer; background: #fff; padding-bottom: 5px; border-radius: 8px; border: 1px solid #eee; box-shadow: 0 2px 4px rgba(0,0,0,0.05); -webkit-tap-highlight-color: transparent; }
-        .gallery-item:hover { transform: scale(1.02); }
-        .gallery-item img { width: 100%; border-radius: 8px 8px 0 0; height: 150px; object-fit: cover; display: block; background: #f9f9f9; }
-        .gallery-item p { text-align: center; margin: 5px 0 2px 0; font-size: 13px; font-weight: bold; color: #555; }
-        .click-hint { font-size: 11px; color: #28a745; display: block; text-align: center; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; }
-        
-        .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
-        .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
-
-        /* POPUP WINDOW MODAL */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); padding: 20px; box-sizing: border-box; }
-        .modal-content { background-color: white; margin: 15% auto; padding: 25px; border-radius: 15px; max-width: 450px; border-top: 8px solid #28a745; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
-        .close-btn { color: #aaa; float: right; font-size: 32px; font-weight: bold; cursor: pointer; margin-top: -15px; -webkit-tap-highlight-color: transparent; }
-        .close-btn:hover { color: #333; }
-        .price-box { background: #e8f5e9; padding: 15px; border-radius: 10px; text-align: center; margin: 15px 0; border: 1px dashed #28a745; }
-        .price-value { font-size: 28px; font-weight: bold; color: #2e7d32; }
-        .details-list { list-style: none; padding: 0; margin: 15px 0; text-align: left; }
-        .details-item { padding: 10px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; font-size: 14px; }
-        .modal-action-btn { display: block; text-align: center; background: #28a745; color: white; padding: 12px; margin: 10px 0; text-decoration: none; border-radius: 8px; font-weight: bold; }
+        /* --- POPUP WINDOW MODAL STYLES --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        /* When active, show modal */
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-window {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+        }
+        .modal-overlay.active .modal-window {
+            transform: scale(1);
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #333;
+        }
+        .modal-title {
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            text-transform: capitalize;
+        }
+        .modal-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .modal-gallery img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            transition: transform 0.2s;
+        }
+        .modal-gallery img:hover {
+            transform: scale(1.05);
+        }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Elie's Custom Furniture</h1>
-    <p class="subtitle">Handcrafted Woodworking & Carpentry Specialist</p>
-    <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
-    
-    <!-- COMM-LINKS -->
-    <a href="tel:+96103174225" class="action-btn">📞 Call Elie For Orders</a>
-    <a href="sms:+96103174225" class="action-btn" style="background: #007bff;">💬 Text Elie Details</a>
-
-    <!-- FOLDER BACK BUTTON -->
-    <button class="back-folder-btn" id="backFolderBtn" onclick="closeFolder()">📁 Close Folder & Go Back</button>
-
-    <!-- CLOSED FOLDERS SELECTION GRID (Fixed without backslashes) -->
-    <div class="folder-grid" id="mainFolderGrid">
-        <div class="folder-card" onclick="openFolder('tables')">
-            <span class="folder-icon">🪑</span> <span>Tables Folder</span>
+    <!-- Target Selection Grid matches your code setup -->
+    <div class="gallery-grid">
+        <div class="gallery-item" onclick="openFolder('bedroom')">
+            <span class="folder-title">Master Bedroom Set 6</span>
+            <span class="click-hint">Tap to view images</span>
         </div>
-        <div class="folder-card" onclick="openFolder('tv')">
-            <span class="folder-icon">📺</span> <span>TV Units Folder</span>
+
+        <div class="gallery-item" onclick="openFolder('table')">
+            <span class="folder-title">Custom Dining Tables</span>
+            <span class="click-hint">Tap to view images</span>
         </div>
-        <div class="folder-card" onclick="openFolder('bedroom')">
-            <span class="folder-icon">🛏️</span> <span>Bedrooms Folder</span>
+
+        <div class="gallery-item" onclick="openFolder('tv')">
+            <span class="folder-title">TV Units & Lounges</span>
+            <span class="click-hint">Tap to view images</span>
         </div>
     </div>
 
-    <!-- 1. TABLES CATALOGUE -->
-    <div class="category-section" id="folder-tables">
-        <h2>🪑 Tables Catalogue</h2>
-        <div class="gallery">
-            <div class="gallery-item" onclick="openPriceModal('Bespoke Dining Table', '$350 - $750', '🪑 Custom Wood Table', '7 - 12 Working Days')">
-                <img src="table/table1.jpeg" onerror="this.src='table/table1.jpg';" alt="Custom Wood Table Design">
-                <p>Bespoke Dining Table</p>
-                <span class="click-hint">🔎 Tap For Price</span>
+    <!-- Interactive Popup Window Markup -->
+    <div class="modal-overlay" id="galleryModal" onclick="closeFolder()">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeFolder()">&times;</button>
+            <h3 class="modal-title" id="modalTitle">Gallery</h3>
+            <div class="modal-gallery" id="modalImages">
+                <!-- JavaScript handles folder injection here -->
             </div>
         </div>
     </div>
 
-    <!-- 2. TV UNITS CATALOGUE -->
-    <div class="category-section" id="folder-tv">
-        <h2>📺 TV Units Catalogue</h2>
-        <div class="gallery">
-            <div class="gallery-item" onclick="openPriceModal('Modern Entertainment Center', '$250 - $600', '📺 Custom Wall Units & TV Stands', '5 - 10 Working Days')">
-                <img src="tv/tv1.jpeg" onerror="this.src='tv/tv1.jpg';" alt="Modern Custom TV Unit">
-                <p>Modern TV Unit 1</p>
-                <span class="click-hint">🔎 Tap For Price</span>
-            </div>
-        </div>
-    </div>
+    <!-- Custom Script Engine Engine -->
+    <script>
+        // 1. Manually map files because GitHub Pages forbids directory index crawling
+        const folderDatabase = {
+            'bedroom': [
+                'elee/bedroom(10).jpeg',
+                'elee/bedroom(11).jpeg',
+                'elee/bedroom(12).jpeg'
+            ],
+            'table': [
+                'table/table(1).jpeg',
+                'table/table(2).jpeg',
+                'table/table(3).jpeg'
+            ],
+            'tv': [
+                'tv/unit(1).jpg',
+                'tv/unit(2).jpg'
+            ]
+        };
 
-    <!-- 3. BEDROOMS CATALOGUE -->
-    <div class="category-section" id="folder-bedroom">
-        <h2>🛏️ Bedrooms Catalogue</h2>
-        <div class="gallery">
-            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 1', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-                <img src="bedroom1(1).jpeg" alt="Bedroom Furniture">
-                <p>Master Bedroom Set 1</p>
-                <span class="click-hint">🔎 Tap For Price</span>
-            </div>
-            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 2', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-                <img src="bedroom1(3).jpeg" onerror="this.src='bedroom1(3).jpe';" alt="Bedroom Furniture">
-                <p>Master Bedroom Set 2</p>
-                <span class="click-hint">🔎 Tap For Price</span>
-            </div>
-            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 3', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-                <img src="bedroom1(4).jpeg" alt="Bedroom Furniture">
-                <p>Master Bedroom Set 3</p>
-                <span class="click-hint">🔎 Tap For Price</span>
-            </div>
-            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 4', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-                <img src="bedroom1(5).jpeg" alt="Bedroom Furniture">
-                <p>Master Bedroom Set 4</p>
-                <span class="click-hint">🔎 Tap For Price</span>
-            </div>
-            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 5', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-                <img src="bedroom1(6).jpeg" alt="Bedroom Furniture">
-                <p>Master Bedroom Set 5</p>
-                <span class="click-hint">🔎 Tap For Price</span>
-            </div>
-            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 6', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-                <img src="bedroom1(7).jpeg" alt="Bedroom Furniture">
-                <p>Master Bedroom Set 6</p>
-                <span class="click-hint">🔎 Tap For Price</span>
-            </div>
-            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 7', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-                <img src="bedroom1(8).jpeg" alt="Bedroom Furniture">
-                <p>Master Bedroom Set 7</p>
-                <span class="click-hint">🔎 Tap For Price</span>
-            </div>
-            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 8', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-                <img src="bedroom1(9).jpeg" alt="Bedroom Furniture">
-                <p>Master Bedroom Set 8</p>
-                <span class="click-hint">🔎 Tap For Price</span>
-            </div>
-            <div class="gallery-item" onclick="openPriceModal('Custom Bedroom Set 9', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-                <img src="bedroom1(10).jpeg" alt="Bedroom Furniture">
-                <p>Master Bedroom Set 9</p>
+        // 2. Open Folder Window Controller
+        function openFolder(folderName) {
+            const modal = document.getElementById('galleryModal');
+            const titleElement = document.getElementById('modalTitle');
+            const imagesContainer = document.getElementById('modalImages');
+
+            // Setup display text
+            titleElement.innerText = folderName + " Collection";
+            imagesContainer.innerHTML = ''; // Wipe past loaded images
+
+            const activeImages = folderDatabase[folderName];
+
+            if (activeImages && activeImages.length > 0) {
+                // Populate popup with mapped directory elements 
+                activeImages.forEach(imagePath => {
+                    const img = document.createElement('img');
+                    img.src = imagePath;
+                    img.alt = folderName + " item";
+                    // Handle load failure gracefully
+                    img.onerror = function() { this.style.display = 'none'; }; 
+                    imagesContainer.appendChild(img);
+                });
+            } else {
+                imagesContainer.innerHTML = '<p style="color:#666;">No images mapped for this category yet.</p>';
+            }
+
+            // Animate popup display window
+            modal.classList.add('active');
+        }
+
+        // 3. Close Folder Window Controller
+        function closeFolder() {
+            document.getElementById('galleryModal').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
