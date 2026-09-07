@@ -16,9 +16,11 @@
         
         /* Gallery Styles */
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .gallery-item { display: block; }
+        .gallery-item { display: block; text-decoration: none; color: inherit; transition: transform 0.2s; }
+        .gallery-item:hover { transform: scale(1.02); }
         .gallery-item img { width: 100%; border-radius: 8px; border: 1px solid #ddd; height: 150px; object-fit: cover; display: block; }
         .gallery-item p { text-align: center; margin: 5px 0 10px 0; font-size: 13px; font-weight: bold; color: #555; }
+        .click-hint { font-size: 11px; color: #28a745; display: block; text-align: center; margin-top: -8px; margin-bottom: 8px; font-weight: normal; }
         
         .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
         .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
@@ -44,43 +46,47 @@
         <button class="filter-btn" onclick="filterGallery(event, 'bedroom')">🛏️ Bedrooms</button>
     </div>
 
-    <!-- PHOTO GALLERY -->
-    <div class="gallery">
-        <!-- Tables Category -->
-        <div class="gallery-item tables">
-            <!-- Tries to read from the eliee subfolder or standard root filenames -->
-            <img src="eliee/table1.jpeg" onerror="this.src='table1(1).jpeg'; this.onerror=function(){this.src='table1.jpeg'; this.onerror=function(){this.src='table.jpeg';}};" alt="Custom Table 1">
-            <p>Bespoke Dining Table</p>
-        </div>
-        <div class="gallery-item tables">
-            <img src="eliee/table2.jpeg" onerror="this.src='table1(2).jpeg'; this.onerror=function(){this.src='table2.jpeg';};" alt="Custom Table 2">
-            <p>Wooden Coffee Table</p>
-        </div>
-
-        <!-- Bedroom Category -->
-        <div class="gallery-item bedroom">
-            <img src="bedroom1(1).jpeg" alt="Bedroom Set 1">
-            <p>Master Bedroom Set</p>
-        </div>
-        <div class="gallery-item bedroom">
-            <img src="bedroom1(3).jpeg" alt="Bedroom Set 2">
-            <p>Luxury Bed Layout</p>
-        </div>
-        <div class="gallery-item bedroom">
-            <img src="bedroom1(4).jpeg" alt="Bedroom Set 3">
-            <p>Custom Wardrobe</p>
-        </div>
-        <div class="gallery-item bedroom">
-            <img src="bedroom1(5).jpeg" alt="Bedroom Set 4">
-            <p>Modern Wood Finish</p>
-        </div>
+    <!-- AUTOMATED PHOTO GALLERY GRID -->
+    <div class="gallery" id="galleryGrid">
+        <!-- Images will auto-inject inside interactive anchor links here -->
     </div>
 
     <a href="index.html" class="btn-back">⬅️ Back to Main Gateway</a>
 </div>
 
-<!-- FILTER SCRIPT -->
+<!-- COMPREHENSIVE AUTOMATION SCRIPT -->
 <script>
+const maxImagesPerCategory = 20;
+const galleryGrid = document.getElementById('galleryGrid');
+
+// 1. Generate Interactive Clickable Table links
+for (let i = 1; i <= maxImagesPerCategory; i++) {
+    const item = document.createElement('a');
+    item.className = 'gallery-item tables';
+    // Links right to cost.html passing the specific title
+    item.href = `cost.html?item=Bespoke Table ${i}`;
+    item.innerHTML = `
+        <img src="table${i}.jpeg" onerror="this.parentElement.remove();" alt="Custom Table ${i}">
+        <p>Bespoke Table ${i}</p>
+        <span class="click-hint">💰 View Est. Cost</span>
+    `;
+    galleryGrid.appendChild(item);
+}
+
+// 2. Generate Interactive Clickable Bedroom links
+for (let i = 1; i <= maxImagesPerCategory; i++) {
+    const item = document.createElement('a');
+    item.className = 'gallery-item bedroom';
+    item.href = `cost.html?item=Custom Bedroom Set ${i}`;
+    item.innerHTML = `
+        <img src="bedroom${i}.jpeg" onerror="this.parentElement.remove();" alt="Bedroom Work ${i}">
+        <p>Custom Bedroom ${i}</p>
+        <span class="click-hint">💰 View Est. Cost</span>
+    `;
+    galleryGrid.appendChild(item);
+}
+
+// 3. Filtering script function
 function filterGallery(evt, category) {
     let buttons = document.getElementsByClassName('filter-btn');
     for (let button of buttons) {
