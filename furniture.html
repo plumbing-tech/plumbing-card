@@ -35,8 +35,8 @@
         .view-desc { font-size: 15px; color: #555; line-height: 1.5; margin: 0 0 20px 0; padding: 0 5px; }
         
         /* Action Contact and Home Button Layouts */
-        .call-now-btn { display: inline-block; background: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 10px; width: 80%; max-width: 300px; box-shadow: 0 4px 10px rgba(37,211,102,0.3); transition: background 0.2s; }
-        .call-now-btn:hover { background: #1ebd56; }
+        .whatsapp-btn { display: inline-block; background: #25D366; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; margin-top: 10px; width: 85%; max-width: 320px; box-shadow: 0 4px 10px rgba(37,211,102,0.3); transition: background 0.2s; }
+        .whatsapp-btn:hover { background: #1ebd56; }
         .nav-footer { margin-top: 50px; margin-bottom: 30px; }
         .home-btn { display: inline-block; background: #8b5a2b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px; }
     </style>
@@ -45,7 +45,7 @@
 
     <div class="catalog-container">
         <h1>Elie's Custom Furniture Catalogue</h1>
-        <p class="subtitle">Click directly on any item to view its sizing profile, descriptions, and direct call actions.</p>
+        <p class="subtitle">Click directly on any item to view its sizing profile, descriptions, and directly send a message.</p>
 
         <!-- 1. MASTER BEDROOM SECTION -->
         <div class="section-heading">🛏️ Custom Master Bedroom Sets</div>
@@ -145,14 +145,14 @@
             <img id="viewImage" src="" alt="Expanded item preview window">
             <p class="view-desc" id="viewDescription"></p>
             
-            <!-- DYNAMIC ACTIVE CALL ACTION LINK BUTTON -->
-            <a id="callLink" href="tel:+961000000" class="call-now-btn">📞 Call Elie to Order</a>
+            <!-- DYNAMIC CHAT LINK BUTTON (Placeholder Phone Number) -->
+            <a id="whatsappLink" href="https://wa.me" target="_blank" class="whatsapp-btn">💬 Inquire on WhatsApp</a>
         </div>
     </div>
 
     <script>
+        // REPLACE THIS NUMBER WITH ELIE'S REAL WHATSAPP NUMBER (Keep the 961 country code!)
+        const elieWhatsAppNumber = "96100000000"; 
+
         function viewAsset(imageSrc, titleText, descriptionText) {
             document.getElementById('viewTitle').innerText = titleText;
-            document.getElementById('viewImage').src = imageSrc;
-            document.getElementById('viewDescription').innerText = descriptionText;
-            
