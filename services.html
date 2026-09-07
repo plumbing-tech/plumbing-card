@@ -9,9 +9,15 @@
         h1, h2 { color: #0056b3; text-align: center; }
         .service-list { list-style: none; padding: 0; }
         .service-item { background: #e9ecef; padding: 12px; margin: 8px 0; border-radius: 6px; font-weight: bold; }
+        
+        /* Button Styles */
+        .btn { display: block; text-align: center; background: #007bff; color: white; padding: 15px; margin: 15px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 18px; }
+        .btn-emergency { background: #dc3545; }
+        .btn-back { background: #6c757d; padding: 12px; margin-top: 25px; font-size: 16px; }
+        
+        /* Gallery Styles */
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
         .gallery img { width: 100%; border-radius: 8px; border: 1px solid #ccc; height: 150px; object-fit: cover; display: block; }
-        .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -26,10 +32,21 @@
         <li class="service-item">🚨 24/7 Emergency Services</li>
     </ul>
 
-         <h2>Our Recent Work</h2>
+    <!-- RESTORED PLUMBING CONTACT BUTTONS -->
+    <a href="tel:+96170100177" class="btn btn-emergency">📞 Call For Emergency</a>
+    <a href="sms:+96170100177" class="btn">💬 Text Me Directly</a>
+    <a href="mailto:selykeyrouz22@gmail.com" class="btn" style="background: #28a745;">✉️ Email for a Quote</a>
+
+    <h2>Our Recent Work</h2>
     <div class="gallery">
-        <!-- Removed the hidden blank spaces inside the src tags -->
+        <!-- Kept your clean working repository pictures -->
         <img src="work1.jpg" alt="Professional Pipe Maintenance Layout">
         <img src="work2.jpg" alt="Under Sink Leak Fix and Tools">
         <img src="work3.jpg" alt="Commercial Fixture & Valve Repair">
     </div>
+
+    <a href="index.html" class="btn btn-back">⬅️ Back to Main Gateway</a>
+</div>
+
+</body>
+</html>
