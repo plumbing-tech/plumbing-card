@@ -46,47 +46,28 @@
         <button class="filter-btn" onclick="filterGallery(event, 'bedroom')">🛏️ Bedrooms</button>
     </div>
 
-    <!-- AUTOMATED PHOTO GALLERY GRID -->
-    <div class="gallery" id="galleryGrid">
-        <!-- Images will auto-inject inside interactive anchor links here -->
+    <!-- PHOTO GALLERY GRID -->
+    <div class="gallery">
+        <!-- Tables Category (Points to your exact table.jpeg file) -->
+        <a href="cost.html?item=Bespoke Table" class="gallery-item tables">
+            <img src="table.jpeg" alt="Custom Table">
+            <p>Bespoke Table</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </a>
+
+        <!-- Bedroom Category (Points to your exact bedroom.jpeg file) -->
+        <a href="cost.html?item=Custom Bedroom Set" class="gallery-item bedroom">
+            <img src="bedroom.jpeg" alt="Bedroom Furniture">
+            <p>Custom Bedroom Set</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </a>
     </div>
 
     <a href="index.html" class="btn-back">⬅️ Back to Main Gateway</a>
 </div>
 
-<!-- COMPREHENSIVE AUTOMATION SCRIPT -->
+<!-- FILTER SCRIPT -->
 <script>
-const maxImagesPerCategory = 20;
-const galleryGrid = document.getElementById('galleryGrid');
-
-// 1. Generate Interactive Clickable Table links
-for (let i = 1; i <= maxImagesPerCategory; i++) {
-    const item = document.createElement('a');
-    item.className = 'gallery-item tables';
-    // Links right to cost.html passing the specific title
-    item.href = `cost.html?item=Bespoke Table ${i}`;
-    item.innerHTML = `
-        <img src="table${i}.jpeg" onerror="this.parentElement.remove();" alt="Custom Table ${i}">
-        <p>Bespoke Table ${i}</p>
-        <span class="click-hint">💰 View Est. Cost</span>
-    `;
-    galleryGrid.appendChild(item);
-}
-
-// 2. Generate Interactive Clickable Bedroom links
-for (let i = 1; i <= maxImagesPerCategory; i++) {
-    const item = document.createElement('a');
-    item.className = 'gallery-item bedroom';
-    item.href = `cost.html?item=Custom Bedroom Set ${i}`;
-    item.innerHTML = `
-        <img src="bedroom${i}.jpeg" onerror="this.parentElement.remove();" alt="Bedroom Work ${i}">
-        <p>Custom Bedroom ${i}</p>
-        <span class="click-hint">💰 View Est. Cost</span>
-    `;
-    galleryGrid.appendChild(item);
-}
-
-// 3. Filtering script function
 function filterGallery(evt, category) {
     let buttons = document.getElementsByClassName('filter-btn');
     for (let button of buttons) {
