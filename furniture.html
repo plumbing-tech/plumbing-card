@@ -1,109 +1,16 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elie's Custom Furniture & Carpentry</title>
-    <style>
-        body { font-family: Arial, sans-serif; background: #fbf8f5; padding: 20px; color: #333; }
-        .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-top: 8px solid #8b5a2b; }
-        h1, h2 { color: #8b5a2b; text-align: center; }
-        p.subtitle { text-align: center; margin-top: -10px; color: #666; font-style: italic; }
-        
-        /* Category Filter Tabs */
-        .filter-container { display: flex; justify-content: center; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
-        .filter-btn { background: #e9ecef; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; color: #555; transition: 0.2s; }
-        .filter-btn.active, .filter-btn:hover { background: #8b5a2b; color: white; }
-        
-        /* Gallery Styles */
-        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .gallery-item { display: block; }
-        .gallery-item img { width: 100%; border-radius: 8px; border: 1px solid #ddd; height: 150px; object-fit: cover; display: block; }
-        .gallery-item p { text-align: center; margin: 5px 0 10px 0; font-size: 13px; font-weight: bold; color: #555; }
-        
-        .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
-        .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-<div class="container">
-    <h1>Elie's Custom Furniture</h1>
-    <p class="subtitle">Handcrafted Woodworking & Carpentry Specialist</p>
-    <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
-    
-    <!-- COMM-LINKS -->
-    <a href="tel:+96103174225" class="action-btn">📞 Call Elie For Orders</a>
-    <a href="sms:+96103174225" class="action-btn" style="background: #007bff;">💬 Text Elie Details</a>
-
-    <h2>Our Work Gallery</h2>
-    
-    <!-- CATEGORY FILTERS -->
-    <div class="filter-container">
-        <button class="filter-btn active" onclick="filterGallery(event, 'all')">✨ All</button>
-        <button class="filter-btn" onclick="filterGallery(event, 'tables')">🪑 Tables</button>
-        <button class="filter-btn" onclick="filterGallery(event, 'chairs')">🪘 Chairs</button>
-        <button class="filter-btn" onclick="filterGallery(event, 'tv')">📺 TV Units</button>
-    </div>
-
     <!-- PHOTO GALLERY -->
     <div class="gallery">
         <!-- Tables Category -->
         <div class="gallery-item tables">
-            <img src="table1.jpg" onerror="this.src='https://unsplash.com'" alt="Custom Table">
+            <!-- Change this to match your exact file name -->
+            <img src="table.jpeg" alt="Custom Table">
             <p>Bespoke Table</p>
         </div>
-        <div class="gallery-item tables">
-            <img src="table2.jpg" onerror="this.src='https://unsplash.com'" alt="Dining Table">
-            <p>Dining Table</p>
-        </div>
 
-        <!-- Chairs Category -->
-        <div class="gallery-item chairs">
-            <img src="chair1.jpg" onerror="this.src='https://unsplash.com'" alt="Handcrafted Chair">
-            <p>Classic Chair</p>
-        </div>
-        <div class="gallery-item chairs">
-            <img src="chair2.jpg" onerror="this.src='https://unsplash.com'" alt="Modern Chair">
-            <p>Modern Chair</p>
-        </div>
-
-        <!-- TV Units Category -->
-        <div class="gallery-item tv">
-            <img src="tv1.jpg" onerror="this.src='https://unsplash.com'" alt="TV Unit">
-            <p>Modern TV Unit</p>
-        </div>
-        <div class="gallery-item tv">
-            <img src="tv2.jpg" onerror="this.src='https://unsplash.com'" alt="Luxury TV Set">
-            <p>Custom Entertainment Center</p>
+        <!-- Bedroom Category -->
+        <div class="gallery-item bedroom">
+            <!-- Change this to match your exact file name -->
+            <img src="bedroom.jpeg" alt="Bedroom Furniture">
+            <p>Custom Bedroom Set</p>
         </div>
     </div>
-
-    <a href="index.html" class="btn-back">⬅️ Back to Main Gateway</a>
-</div>
-
-<!-- FILTER SCRIPT -->
-<script>
-function filterGallery(evt, category) {
-    // Correctly apply active button styling using the passed event
-    let buttons = document.getElementsByClassName('filter-btn');
-    for (let button of buttons) {
-        button.classList.remove('active');
-    }
-    evt.currentTarget.classList.add('active');
-
-    // Show/Hide items based on class categories
-    let items = document.getElementsByClassName('gallery-item');
-    for (let item of items) {
-        if (category === 'all') {
-            item.style.display = 'block';
-        } else if (item.classList.contains(category)) {
-            item.style.display = 'block';
-        } else {
-            item.style.display = 'none';
-        }
-    }
-}
-</script>
-
-</body>
-</html>
