@@ -16,7 +16,7 @@
         
         /* Gallery Styles */
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .gallery-item { display: block; text-decoration: none; color: inherit; transition: transform 0.2s; }
+        .gallery-item { display: block; text-decoration: none; color: inherit; cursor: pointer; transition: transform 0.2s; }
         .gallery-item:hover { transform: scale(1.02); }
         .gallery-item img { width: 100%; border-radius: 8px; border: 1px solid #ddd; height: 150px; object-fit: cover; display: block; }
         .gallery-item p { text-align: center; margin: 5px 0 10px 0; font-size: 13px; font-weight: bold; color: #555; }
@@ -24,6 +24,17 @@
         
         .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
         .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
+
+        /* POPUP WINDOW STYLES (MODAL) */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); padding: 20px; box-sizing: border-box; }
+        .modal-content { background-color: white; margin: 15% auto; padding: 25px; border-radius: 15px; max-width: 450px; border-top: 8px solid #28a745; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
+        .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; margin-top: -15px; }
+        .close-btn:hover { color: #333; }
+        .price-box { background: #e8f5e9; padding: 15px; border-radius: 10px; text-align: center; margin: 15px 0; border: 1px dashed #28a745; }
+        .price-value { font-size: 28px; font-weight: bold; color: #2e7d32; }
+        .details-list { list-style: none; padding: 0; margin: 15px 0; text-align: left; }
+        .details-item { padding: 10px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; font-size: 14px; }
+        .modal-action-btn { display: block; text-align: center; background: #28a745; color: white; padding: 12px; margin: 10px 0; text-decoration: none; border-radius: 8px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -48,26 +59,52 @@
 
     <!-- PHOTO GALLERY GRID -->
     <div class="gallery">
-        <!-- Tables Category (Points to your exact table.jpeg file) -->
-        <a href="cost.html?item=Bespoke Table" class="gallery-item tables">
+        <!-- Tables Category - Triggers popup onclick instantly -->
+        <div class="gallery-item tables" onclick="openPriceModal('Bespoke Table', '$350 - $750', '🪑 Custom Wood Table', '7 - 12 Working Days')">
             <img src="table.jpeg" alt="Custom Table">
             <p>Bespoke Table</p>
             <span class="click-hint">💰 View Est. Cost</span>
-        </a>
+        </div>
 
-        <!-- Bedroom Category (Points to your exact bedroom.jpeg file) -->
-        <a href="cost.html?item=Custom Bedroom Set" class="gallery-item bedroom">
+        <!-- Bedroom Category - Triggers popup onclick instantly -->
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom.jpeg" alt="Bedroom Furniture">
             <p>Custom Bedroom Set</p>
             <span class="click-hint">💰 View Est. Cost</span>
-        </a>
+        </div>
     </div>
 
     <a href="index.html" class="btn-back">⬅️ Back to Main Gateway</a>
 </div>
 
-<!-- FILTER SCRIPT -->
+<!-- POPUP PRICE BOX MODAL WINDOW -->
+<div id="priceModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closePriceModal()">&times;</span>
+        <h2 id="modalItemName" style="color:#28a745; margin-top:0;">Furniture Item</h2>
+        <p style="text-align:center; font-size:12px; color:#666; margin-top:-5px;">Official Workshop Price Estimate</p>
+        
+        <div class="price-box">
+            <p style="margin:0; font-weight:bold; color:#555; font-size:14px;">Estimated Base Cost</p>
+            <div class="price-value" id="modalItemPrice">$0.00</div>
+            <p style="margin:5px 0 0 0; font-size:11px; color:#666;">*Final quote depends on dimensions & material choice</p>
+        </div>
+
+        <ul class="details-list">
+            <li class="details-item"><strong>Category Type:</strong> <span id="modalItemCategory">-</span></li>
+            <li class="details-item"><strong>Standard Turnaround:</strong> <span id="modalItemTime">-</span></li>
+            <li class="details-item"><strong>Available Woods:</strong> <span>Oak, Walnut, Beech, Pine</span></li>
+            <li class="details-item"><strong>Craftsman:</strong> <span>Elie (03174225)</span></li>
+        </ul>
+
+        <a href="tel:+96103174225" class="modal-action-btn">📞 Call to Confirm Order</a>
+        <a id="modalSmsLink" href="sms:+96103174225" class="modal-action-btn" style="background:#007bff;">💬 Text Design Specifications</a>
+    </div>
+</div>
+
+<!-- ALL SCRIPTS (FILTERING & INTERACTIVE POPUPS) -->
 <script>
+// Filter functions
 function filterGallery(evt, category) {
     let buttons = document.getElementsByClassName('filter-btn');
     for (let button of buttons) {
@@ -84,6 +121,31 @@ function filterGallery(evt, category) {
         } else {
             item.style.display = 'none';
         }
+    }
+}
+
+// Instant popup pricing mechanics
+function openPriceModal(name, price, category, time) {
+    document.getElementById('modalItemName').innerText = name;
+    document.getElementById('modalItemPrice').innerText = price;
+    document.getElementById('modalItemCategory').innerText = category;
+    document.getElementById('modalItemTime').innerText = time;
+    
+    // Auto fill SMS details text string
+    document.getElementById('modalSmsLink').href = "sms:+96103174225?body=Hi Elie, I am interested in getting a quote for the " + name;
+    
+    document.getElementById('priceModal').style.display = "block";
+}
+
+function closePriceModal() {
+    document.getElementById('priceModal').style.display = "none";
+}
+
+// Close the modal screen window if user clicks outside of the card box anywhere on screen
+window.onclick = function(event) {
+    let modal = document.getElementById('priceModal');
+    if (event.target == modal) {
+        modal.style.display = "none";
     }
 }
 </script>
