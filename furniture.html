@@ -11,21 +11,21 @@
         
         /* Category Filter Tabs */
         .filter-container { display: flex; justify-content: center; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
-        .filter-btn { background: #e9ecef; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; color: #555; transition: 0.2s; }
+        .filter-btn { background: #e9ecef; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; color: #555; transition: 0.2s; -webkit-tap-highlight-color: transparent; }
         .filter-btn.active, .filter-btn:hover { background: #8b5a2b; color: white; }
         
         /* Gallery Styles */
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .gallery-item { display: block; text-decoration: none; color: inherit; cursor: pointer; background: #fff; padding-bottom: 5px; border-radius: 8px; border: 1px solid #eee; transition: transform 0.2s; }
+        .gallery-item { display: block; text-decoration: none; color: inherit; cursor: pointer; background: #fff; padding-bottom: 5px; border-radius: 8px; border: 1px solid #eee; transition: transform 0.2s; -webkit-tap-highlight-color: transparent; }
         .gallery-item:hover { transform: scale(1.02); }
-        .gallery-item img { width: 100%; border-radius: 8px 8px 0 0; height: 150px; object-fit: cover; display: block; background: #f4ece6; }
+        .gallery-item img { width: 100%; border-radius: 8px 8px 0 0; height: 150px; object-fit: cover; display: block; background: #f9f9f9; }
         .gallery-item p { text-align: center; margin: 5px 0 2px 0; font-size: 13px; font-weight: bold; color: #555; }
         .click-hint { font-size: 11px; color: #28a745; display: block; text-align: center; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; }
         
         .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
         .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
 
-        /* POPUP DETAILS WINDOW MODAL */
+        /* POPUP PRICE MODAL WINDOW */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); padding: 20px; box-sizing: border-box; }
         .modal-content { background-color: white; margin: 15% auto; padding: 25px; border-radius: 15px; max-width: 450px; border-top: 8px solid #28a745; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
         .close-btn { color: #aaa; float: right; font-size: 32px; font-weight: bold; cursor: pointer; margin-top: -15px; }
@@ -50,23 +50,23 @@
 
     <h2>Our Work Gallery</h2>
     
-    <!-- CATEGORY FILTERS -->
+    <!-- CATEGORY FILTERS (Fixed variables to unlock mobile clicks) -->
     <div class="filter-container">
-        <button class="filter-btn active" id="btn-all" onclick="filterGallery('all')">✨ All</button>
-        <button class="filter-btn" id="btn-tables" onclick="filterGallery('tables')">🪑 Tables & Chairs</button>
-        <button class="filter-btn" id="btn-bedroom" onclick="filterGallery('bedroom')">🛏️ Bedrooms</button>
+        <button class="filter-btn active" onclick="filterGallery(event, 'all')">✨ All</button>
+        <button class="filter-btn" onclick="filterGallery(event, 'tables')">🪑 Tables & Chairs</button>
+        <button class="filter-btn" onclick="filterGallery(event, 'bedroom')">🛏️ Bedrooms</button>
     </div>
 
-    <!-- MAIN COMPREHENSIVE IMAGE PORTFOLIO GRID -->
+    <!-- PHOTO GALLERY GRID -->
     <div class="gallery">
-        <!-- Tables Category (Fixed with a verified online fallback image so it doesn't break the page loop) -->
+        <!-- Tables Category - Mapped directly inside your specific folder 'table/' -->
         <div class="gallery-item tables" onclick="openPriceModal('Bespoke Dining Table', '$350 - $750', '🪑 Custom Wood Table', '7 - 12 Working Days')">
-            <img src="chair1.jpg" onerror="this.src='https://unsplash.com';" alt="Custom Wood Table Design">
+            <img src="table/table1.jpeg" onerror="this.src='table/table1.jpg'; this.onerror=function(){this.src='chair1.jpg';};" alt="Custom Wood Table Design">
             <p>Bespoke Dining Table</p>
             <span class="click-hint">🔎 Tap For Price</span>
         </div>
 
-        <!-- Bedroom Category -->
+        <!-- Bedroom Category - Mapped directly to your root file structure -->
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 1', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(1).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 1</p>
@@ -126,22 +126,19 @@
 </div>
 
 <!-- POPUP PRICE BOX MODAL WINDOW -->
-<div id="priceModal" class="modal" onclick="closePriceModalOutside(event)">
-    <div class="modal-content" onclick="event.stopPropagation()">
+<div id="priceModal" class="modal">
+    <div class="modal-content">
         <span class="close-btn" onclick="closePriceModal()">&times;</span>
         <h2 id="modalItemName" style="color:#28a745; margin-top:0;">Furniture Item</h2>
-        <p style="text-align:center; font-size:12px; color:#666; margin-top:-5px;">Official Workshop Price Estimate</p>
         
         <div class="price-box">
             <p style="margin:0; font-weight:bold; color:#555; font-size:14px;">Estimated Base Cost</p>
             <div class="price-value" id="modalItemPrice">$0.00</div>
-            <p style="margin:5px 0 0 0; font-size:11px; color:#666;">*Final quote depends on dimensions & material choice</p>
         </div>
 
         <ul class="details-list">
             <li class="details-item"><strong>Category Type:</strong> <span id="modalItemCategory">-</span></li>
             <li class="details-item"><strong>Standard Turnaround:</strong> <span id="modalItemTime">-</span></li>
-            <li class="details-item"><strong>Available Woods:</strong> <span>Oak, Walnut, Beech, Pine</span></li>
             <li class="details-item"><strong>Craftsman:</strong> <span>Elie (03174225)</span></li>
         </ul>
 
@@ -149,8 +146,15 @@
     </div>
 </div>
 
-<!-- FAST SYSTEM-LEVEL INTERACTION SCRIPTS -->
+<!-- ALL SCRIPTS UNLOCKED AND MATCHED PERFECTLY -->
 <script>
-function filterGallery(category) {
+function filterGallery(event, category) {
+    // Unifies the event handler target parameters correctly
     var buttons = document.getElementsByClassName('filter-btn');
     for (var i = 0; i < buttons.length; i++) {
+        buttons[i].classList.remove('active');
+    }
+    event.currentTarget.classList.add('active');
+
+    var items = document.getElementsByClassName('gallery-item');
+    for (var j = 0; j < items.length; j++) {
