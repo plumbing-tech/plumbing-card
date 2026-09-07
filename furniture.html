@@ -57,16 +57,16 @@
         <button class="filter-btn" onclick="filterGallery(event, 'bedroom')">🛏️ Bedrooms</button>
     </div>
 
-    <!-- MAIN COMPREHENSIVE IMAGE PORTFOLIO GRID -->
+    <!-- PORTFOLIO IMAGE GRID -->
     <div class="gallery">
-        <!-- Tables Category - Pointed inside your active 'eliee/' image directory folder -->
+        <!-- Tables Category - Mapped directly to look inside the eliee folder or fall back to your main screen -->
         <div class="gallery-item tables" onclick="openPriceModal('Bespoke Dining Table', '$350 - $750', '🪑 Custom Wood Table', '7 - 12 Working Days')">
-            <img src="eliee/table1(1).jpeg" onerror="this.src='eliee/table.jpeg'; this.onerror=function(){this.src='chair1.jpg';};" alt="Custom Wood Table Design">
+            <img src="eliee/table1(1).jpeg" onerror="this.src='eliee/table.jpeg'; this.onerror=function(){this.src='table1.jpeg'; this.onerror=function(){this.src='chair1.jpg';}};" alt="Custom Wood Table Design">
             <p>Bespoke Dining Table</p>
             <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
-        <!-- Bedroom Category - Mapped directly to your main file list screen -->
+        <!-- Bedroom Category - Mapped to match your filenames perfectly -->
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 1', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(1).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 1</p>
@@ -149,11 +149,11 @@
     </div>
 </div>
 
-<!-- RUN SCRIPTS -->
+<!-- FIXED ALL LOGIC LISTENERS -->
 <script>
-function filterGallery(evt, category) {
+function filterGallery(event, category) {
     let buttons = document.getElementsByClassName('filter-btn');
     for (let button of buttons) { button.classList.remove('active'); }
-    evt.currentTarget.classList.add('active');
+    event.currentTarget.classList.add('active');
 
     let items = document.getElementsByClassName('gallery-item');
