@@ -8,10 +8,18 @@
         .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-top: 8px solid #8b5a2b; }
         h1, h2 { color: #8b5a2b; text-align: center; }
         p.subtitle { text-align: center; margin-top: -10px; color: #666; font-style: italic; }
-        .service-list { list-style: none; padding: 0; }
-        .service-item { background: #f4ece6; padding: 12px; margin: 8px 0; border-radius: 6px; font-weight: bold; border-left: 4px solid #8b5a2b; }
-        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .gallery img { width: 100%; border-radius: 8px; border: 1px solid #ddd; height: 150px; object-fit: cover; display: block; }
+        
+        /* Category Filter Tabs */
+        .filter-container { display: flex; justify-content: center; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
+        .filter-btn { background: #e9ecef; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; color: #555; transition: 0.2s; }
+        .filter-btn.active, .filter-btn:hover { background: #8b5a2b; color: white; }
+        
+        /* Gallery Styles */
+        .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .gallery-item { display: block; }
+        .gallery-item img { width: 100%; border-radius: 8px; border: 1px solid #ddd; height: 150px; object-fit: cover; display: block; }
+        .gallery-item p { text-align: center; margin: 5px 0 10px 0; font-size: 13px; font-weight: bold; color: #555; }
+        
         .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
         .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
     </style>
@@ -23,28 +31,79 @@
     <p class="subtitle">Handcrafted Woodworking & Carpentry Specialist</p>
     <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
     
-    <h2>What I Build & Fix</h2>
-    <ul class="service-list">
-        <li class="service-item">🪑 Custom Tables, Chairs & Styling</li>
-        <li class="service-item">🪓 Furniture Restoration & Repairs</li>
-        <li class="service-item">📦 Bespoke Cabinets & Shelving Units</li>
-        <li class="service-item">🪵 Fine Finish Carpentry & Assembly</li>
-    </ul>
-
-    <!-- DUAL COMM-LINKS INTEGRATING ELIE'S CONTACT METHODS DIRECTLY -->
+    <!-- COMM-LINKS -->
     <a href="tel:+96103174225" class="action-btn">📞 Call Elie For Orders</a>
     <a href="sms:+96103174225" class="action-btn" style="background: #007bff;">💬 Text Elie Details</a>
-    <a href="mailto:selykeyrouz22@gmail.com" class="action-btn" style="background:#5c3a1a;">✉️ Email Blueprint & Dimensions</a>
 
-    <h2>Recent Woodwork Projects</h2>
+    <h2>Our Work Gallery</h2>
+    
+    <!-- CATEGORY FILTERS -->
+    <div class="filter-container">
+        <button class="filter-btn active" onclick="filterGallery('all')">✨ All</button>
+        <button class="filter-btn" onclick="filterGallery('tables')">🪑 Tables</button>
+        <button class="filter-btn" onclick="filterGallery('chairs')">🪘 Chairs</button>
+        <button class="filter-btn" onclick="filterGallery('tv')">📺 TV Units</button>
+    </div>
+
+    <!-- PHOTO GALLERY -->
     <div class="gallery">
-        <img src="https://unsplash.com" alt="Custom wood table building layout">
-        <img src="https://unsplash.com" alt="Finished bespoke premium furniture">
-        <img src="https://unsplash.com" alt="Modern commercial shelving install">
+        <!-- Tables Category -->
+        <div class="gallery-item tables">
+            <img src="table1.jpg" onerror="this.src='https://unsplash.com'" alt="Custom Table">
+            <p>Bespoke Table</p>
+        </div>
+        <div class="gallery-item tables">
+            <img src="table2.jpg" onerror="this.src='https://unsplash.com'" alt="Dining Table">
+            <p>Dining Table</p>
+        </div>
+
+        <!-- Chairs Category -->
+        <div class="gallery-item chairs">
+            <img src="chair1.jpg" onerror="this.src='https://unsplash.com'" alt="Handcrafted Chair">
+            <p>Classic Chair</p>
+        </div>
+        <div class="gallery-item chairs">
+            <img src="chair2.jpg" onerror="this.src='https://unsplash.com'" alt="Modern Chair">
+            <p>Modern Chair</p>
+        </div>
+
+        <!-- TV Units Category -->
+        <div class="gallery-item tv">
+            <img src="tv1.jpg" onerror="this.src='https://unsplash.com'" alt="TV Unit">
+            <p>Modern TV Unit</p>
+        </div>
+        <div class="gallery-item tv">
+            <img src="tv2.jpg" onerror="this.src='https://unsplash.com'" alt="Luxury TV Set">
+            <p>Custom Entertainment Center</p>
+        </div>
     </div>
 
     <a href="index.html" class="btn-back">⬅️ Back to Main Gateway</a>
 </div>
+
+<!-- FILTER SCRIPT -->
+<script>
+function filterGallery(category) {
+    // Update active button styling
+    let buttons = document.getElementsByClassName('filter-btn');
+    for (let button of buttons) {
+        button.classList.remove('active');
+    }
+    event.currentTarget.classList.add('active');
+
+    // Show/Hide items based on class
+    let items = document.getElementsByClassName('gallery-item');
+    for (let item of items) {
+        if (category === 'all') {
+            item.style.display = 'block';
+        } else if (item.classList.contains(category)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    }
+}
+</script>
 
 </body>
 </html>
