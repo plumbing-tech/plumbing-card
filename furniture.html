@@ -9,36 +9,32 @@
         h1 { color: #8b5a2b; margin-top: 10px; margin-bottom: 5px; }
         .subtitle { color: #666; font-size: 15px; margin-bottom: 30px; }
         
+        /* Master Catalog Layout Grid */
         .catalog-container { max-width: 1200px; margin: 0 auto; padding: 0 10px; }
         .section-heading { text-align: left; color: #8b5a2b; border-bottom: 2px dashed #8b5a2b; padding-bottom: 8px; margin-top: 35px; margin-bottom: 20px; font-size: 22px; }
         .furniture-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-bottom: 20px; }
         
+        /* Individual Item Card Details */
         .furniture-card { background: white; border: 1px solid #e6dfd5; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.04); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; text-align: left; }
         .furniture-card:hover { transform: translateY(-4px); box-shadow: 0 6px 15px rgba(139,90,43,0.15); }
-        
-        /* Fail-safe placeholder setup if images drop out */
-        .image-wrapper { width: 100%; height: 210px; background: #eae3d8; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
-        .furniture-card img { width: 100%; height: 100%; object-fit: cover; display: block; z-index: 2; position: relative; }
-        .fallback-text { position: absolute; font-size: 50px; z-index: 1; color: #8b5a2b; display: block; font-weight: bold; }
-        
+        .image-wrapper { width: 100%; height: 210px; background: #fafafa; overflow: hidden; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #f0eae1; }
+        .furniture-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .card-details { padding: 15px; }
         .item-tag { display: inline-block; font-size: 11px; background: #f5eae0; color: #8b5a2b; font-weight: bold; padding: 3px 8px; border-radius: 12px; margin-bottom: 8px; text-transform: uppercase; }
         .item-title { font-weight: bold; font-size: 16px; margin: 0 0 5px 0; color: #222; }
         .item-hint { font-size: 12px; color: #8b5a2b; font-weight: bold; margin: 0; }
 
+        /* Full Screen Viewer Backdrop */
         .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); display: flex; justify-content: center; align-items: center; z-index: 2000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .overlay.active { opacity: 1; pointer-events: auto; }
         .viewer-box { background: white; padding: 25px; border-radius: 16px; max-width: 600px; width: 90%; max-height: 90vh; overflow-y: auto; position: relative; transform: scale(0.8); transition: transform 0.3s ease; text-align: center; }
         .overlay.active .viewer-box { transform: scale(1); }
         .close-btn { position: absolute; top: 12px; right: 18px; font-size: 32px; background: none; border: none; cursor: pointer; color: #444; line-height: 1; }
-        
-        .modal-image-wrapper { width: 100%; max-height: 380px; min-height: 200px; background: #fdfdfd; display: flex; align-items: center; justify-content: center; position: relative; border-radius: 8px; margin-bottom: 15px; }
-        #viewImage { width: 100%; max-height: 380px; object-fit: contain; border-radius: 8px; z-index: 2; position: relative; }
-        .modal-fallback-text { position: absolute; font-size: 70px; z-index: 1; color: #c4b39e; }
-        
+        #viewImage { width: 100%; max-height: 380px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; background: #fdfdfd; display: inline-block; }
         .view-title { color: #8b5a2b; margin: 0 0 10px 0; font-size: 22px; }
         .view-desc { font-size: 15px; color: #555; line-height: 1.5; margin: 0; padding: 0 5px; }
         
+        /* Navigation Elements */
         .nav-footer { margin-top: 50px; margin-bottom: 30px; }
         .home-btn { display: inline-block; background: #8b5a2b; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 15px; }
     </style>
@@ -52,11 +48,17 @@
         <!-- 1. MASTER BEDROOM SECTION -->
         <div class="section-heading">🛏️ Custom Master Bedroom Sets</div>
         <div class="furniture-grid">
-            <div class="furniture-card" onclick="viewAsset('elee/bedroom(10).jpeg', 'Master Bedroom Set (10)', '🛏️', 'Bespoke custom master suite layout featuring integrated wooden frame profiling and custom architectural assembly details.')">
-                <div class="image-wrapper">
-                    <span class="fallback-text">🛏️</span>
-                    <img src="elee/bedroom(10).jpeg" onerror="this.style.display='none'">
+            <div class="furniture-card" onclick="viewAsset('bedroom(1).jpeg', 'Master Bedroom Set (1)', 'Bespoke custom master suite layout featuring integrated wooden frame profiling and custom architectural assembly details.')">
+                <div class="image-wrapper"><img src="bedroom(1).jpeg"></div>
+                <div class="card-details">
+                    <span class="item-tag">Bedroom</span>
+                    <p class="item-title">Master Bedroom Set (1)</p>
+                    <p class="item-hint">View Details ➔</p>
                 </div>
+            </div>
+
+            <div class="furniture-card" onclick="viewAsset('bedroom(10).jpeg', 'Master Bedroom Set (10)', 'Handcrafted luxury bedroom structure made from high-end select timber, optimizing space configurations gracefully.')">
+                <div class="image-wrapper"><img src="bedroom(10).jpeg"></div>
                 <div class="card-details">
                     <span class="item-tag">Bedroom</span>
                     <p class="item-title">Master Bedroom Set (10)</p>
@@ -64,11 +66,8 @@
                 </div>
             </div>
             
-            <div class="furniture-card" onclick="viewAsset('elee/bedroom(11).jpeg', 'Master Bedroom Set (11)', '🛏️', 'Handcrafted luxury bedroom structure made from high-end select timber, optimizing space configurations gracefully.')">
-                <div class="image-wrapper">
-                    <span class="fallback-text">🛏️</span>
-                    <img src="elee/bedroom(11).jpeg" onerror="this.style.display='none'">
-                </div>
+            <div class="furniture-card" onclick="viewAsset('bedroom(11).jpeg', 'Master Bedroom Set (11)', 'Modern architectural carpentry layout with clean joints, elegant framing, and integrated soft-close design components.')">
+                <div class="image-wrapper"><img src="bedroom(11).jpeg"></div>
                 <div class="card-details">
                     <span class="item-tag">Bedroom</span>
                     <p class="item-title">Master Bedroom Set (11)</p>
@@ -76,11 +75,8 @@
                 </div>
             </div>
 
-            <div class="furniture-card" onclick="viewAsset('elee/bedroom(12).jpeg', 'Master Bedroom Set (12)', '🛏️', 'Modern architectural carpentry layout with clean joints, elegant framing, and integrated soft-close design components.')">
-                <div class="image-wrapper">
-                    <span class="fallback-text">🛏️</span>
-                    <img src="elee/bedroom(12).jpeg" onerror="this.style.display='none'">
-                </div>
+            <div class="furniture-card" onclick="viewAsset('bedroom(12).jpeg', 'Master Bedroom Set (12)', 'Premium master wood setup with custom storage configurations.')">
+                <div class="image-wrapper"><img src="bedroom(12).jpeg"></div>
                 <div class="card-details">
                     <span class="item-tag">Bedroom</span>
                     <p class="item-title">Master Bedroom Set (12)</p>
@@ -92,11 +88,8 @@
         <!-- 2. DINING TABLES SECTION -->
         <div class="section-heading">🪑 Custom Dining Tables</div>
         <div class="furniture-grid">
-            <div class="furniture-card" onclick="viewAsset('table/table(1).jpeg', 'Bespoke Table Set (1)', '🪑', 'Elegant dining area centerpiece built with solid lumber planks, finished with clear protective coatings.')">
-                <div class="image-wrapper">
-                    <span class="fallback-text">🪑</span>
-                    <img src="table/table(1).jpeg" onerror="this.style.display='none'">
-                </div>
+            <div class="furniture-card" onclick="viewAsset('table(1).jpg', 'Bespoke Table Set (1)', 'Elegant dining area centerpiece built with solid lumber planks, finished with clear protective coatings.')">
+                <div class="image-wrapper"><img src="table(1).jpg"></div>
                 <div class="card-details">
                     <span class="item-tag">Dining</span>
                     <p class="item-title">Bespoke Table Set (1)</p>
@@ -104,26 +97,20 @@
                 </div>
             </div>
 
-            <div class="furniture-card" onclick="viewAsset('table/table(2).jpeg', 'Bespoke Table Set (2)', '🪑', 'Industrial blend modern dining assembly framework built to fit custom residential dimension specifications.')">
-                <div class="image-wrapper">
-                    <span class="fallback-text">🪑</span>
-                    <img src="table/table(2).jpeg" onerror="this.style.display='none'">
-                </div>
+            <div class="furniture-card" onclick="viewAsset('table(11).jpeg', 'Bespoke Table Set (11)', 'Industrial blend modern dining assembly framework built to fit custom residential dimension specifications.')">
+                <div class="image-wrapper"><img src="table(11).jpeg"></div>
                 <div class="card-details">
                     <span class="item-tag">Dining</span>
-                    <p class="item-title">Bespoke Table Set (2)</p>
+                    <p class="item-title">Bespoke Table Set (11)</p>
                     <p class="item-hint">View Details ➔</p>
                 </div>
             </div>
 
-            <div class="furniture-card" onclick="viewAsset('table/table(3).jpeg', 'Bespoke Table Set (3)', '🪑', 'Luxury rustic carpentry detailing showcasing unique timber wood grain patterns and robust perimeter edge construction.')">
-                <div class="image-wrapper">
-                    <span class="fallback-text">🪑</span>
-                    <img src="table/table(3).jpeg" onerror="this.style.display='none'">
-                </div>
+            <div class="furniture-card" onclick="viewAsset('table(12).jpg', 'Bespoke Table Set (12)', 'Luxury rustic carpentry detailing showcasing unique timber wood grain patterns and robust perimeter edge construction.')">
+                <div class="image-wrapper"><img src="table(12).jpg"></div>
                 <div class="card-details">
                     <span class="item-tag">Dining</span>
-                    <p class="item-title">Bespoke Table Set (3)</p>
+                    <p class="item-title">Bespoke Table Set (12)</p>
                     <p class="item-hint">View Details ➔</p>
                 </div>
             </div>
@@ -132,11 +119,9 @@
         <!-- 3. TV UNITS SECTION -->
         <div class="section-heading">📺 Architectural TV Units & Lounges</div>
         <div class="furniture-grid">
-            <div class="furniture-card" onclick="viewAsset('tv/tvunit(1).jpg', 'Modern TV Assembly (1)', '📺', 'Floating media console featuring integrated cable routing slots and sleek geometric touch-latch storage options.')">
-                <div class="image-wrapper">
-                    <span class="fallback-text">📺</span>
-                    <img src="tv/tvunit(1).jpg" onerror="this.style.display='none'">
-                </div>
+            <!-- Named exactly tvunite1.jpg to match your file spelling typo from the video -->
+            <div class="furniture-card" onclick="viewAsset('tvunite1.jpg', 'Modern TV Assembly (1)', 'Floating media console featuring integrated cable routing slots and sleek geometric touch-latch storage options.')">
+                <div class="image-wrapper"><img src="tvunite1.jpg"></div>
                 <div class="card-details">
                     <span class="item-tag">Living Room</span>
                     <p class="item-title">Modern TV Assembly (1)</p>
@@ -145,6 +130,7 @@
             </div>
         </div>
 
+        <!-- BOTTOM BACK BUTTON -->
         <div class="nav-footer">
             <a href="index.html" class="home-btn">➔ Return to Services Main Portal</a>
         </div>
@@ -153,3 +139,19 @@
     <!-- ACTIVE ZOOM INTERACTIVE VIEW MODAL OVERLAY -->
     <div class="overlay" id="assetViewer" onclick="closeAsset()">
         <div class="viewer-box" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeAsset()">&times;</button>
+            <h3 class="view-title" id="viewTitle">Product Overview</h3>
+            <img id="viewImage" src="" alt="Expanded item preview window">
+            <p class="view-desc" id="viewDescription"></p>
+        </div>
+    </div>
+
+    <script>
+        function viewAsset(imageSrc, titleText, descriptionText) {
+            document.getElementById('viewTitle').innerText = titleText;
+            document.getElementById('viewImage').src = imageSrc;
+            document.getElementById('viewDescription').innerText = descriptionText;
+            document.getElementById('assetViewer').classList.add('active');
+        }
+
+        function closeAsset() {
