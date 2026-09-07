@@ -11,12 +11,12 @@
         
         /* Category Filter Tabs */
         .filter-container { display: flex; justify-content: center; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
-        .filter-btn { background: #e9ecef; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; color: #555; transition: 0.2s; }
+        .filter-btn { background: #e9ecef; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; color: #555; transition: 0.2s; -webkit-tap-highlight-color: transparent; }
         .filter-btn.active, .filter-btn:hover { background: #8b5a2b; color: white; }
         
         /* Gallery Styles */
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .gallery-item { display: block; text-decoration: none; color: inherit; cursor: pointer; background: #fff; padding-bottom: 5px; border-radius: 8px; border: 1px solid #eee; transition: transform 0.2s; }
+        .gallery-item { display: block; text-decoration: none; color: inherit; cursor: pointer; background: #fff; padding-bottom: 5px; border-radius: 8px; border: 1px solid #eee; transition: transform 0.2s; -webkit-tap-highlight-color: transparent; }
         .gallery-item:hover { transform: scale(1.02); }
         .gallery-item img { width: 100%; border-radius: 8px 8px 0 0; height: 150px; object-fit: cover; display: block; }
         .gallery-item p { text-align: center; margin: 5px 0 2px 0; font-size: 13px; font-weight: bold; color: #555; }
@@ -36,6 +36,41 @@
         .details-item { padding: 10px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; font-size: 14px; }
         .modal-action-btn { display: block; text-align: center; background: #28a745; color: white; padding: 12px; margin: 10px 0; text-decoration: none; border-radius: 8px; font-weight: bold; }
     </style>
+
+    <!-- CRITICAL FIX: ALL SCRIPTING MOVED UP TO PREVENT MOBILE FREEZING -->
+    <script>
+    function filterGallery(category) {
+        var buttons = document.getElementsByClassName('filter-btn');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].classList.remove('active');
+        }
+        
+        if(category === 'all') document.getElementById('btn-all').classList.add('active');
+        if(category === 'tables') document.getElementById('btn-tables').classList.add('active');
+        if(category === 'bedroom') document.getElementById('btn-bedroom').classList.add('active');
+
+        var items = document.getElementsByClassName('gallery-item');
+        for (var j = 0; j < items.length; j++) {
+            if (category === 'all' || items[j].classList.contains(category)) { 
+                items[j].style.display = 'block'; 
+            } else { 
+                items[j].style.display = 'none'; 
+            }
+        }
+    }
+
+    function openPriceModal(name, price, category, time) {
+        document.getElementById('modalItemName').innerText = name;
+        document.getElementById('modalItemPrice').innerText = price;
+        document.getElementById('modalItemCategory').innerText = category;
+        document.getElementById('modalItemTime').innerText = time;
+        document.getElementById('priceModal').style.display = "block";
+    }
+
+    function closePriceModal() { 
+        document.getElementById('priceModal').style.display = "none"; 
+    }
+    </script>
 </head>
 <body>
 
@@ -50,14 +85,14 @@
 
     <h2>Our Work Gallery</h2>
     
-    <!-- CATEGORY FILTERS (Simplified to click immediately on mobile) -->
+    <!-- CATEGORY FILTERS -->
     <div class="filter-container">
         <button class="filter-btn active" id="btn-all" onclick="filterGallery('all')">✨ All</button>
         <button class="filter-btn" id="btn-tables" onclick="filterGallery('tables')">🪑 Tables & Chairs</button>
         <button class="filter-btn" id="btn-bedroom" onclick="filterGallery('bedroom')">🛏️ Bedrooms</button>
     </div>
 
-    <!-- CLEAN PORTFOLIO IMAGE GRID -->
+    <!-- PHOTO GALLERY GRID -->
     <div class="gallery">
         <!-- Tables Category -->
         <div class="gallery-item tables" onclick="openPriceModal('Bespoke Dining Table', '$350 - $750', '🪑 Custom Wood Table', '7 - 12 Working Days')">
@@ -126,35 +161,6 @@
 </div>
 
 <!-- POPUP PRICE BOX MODAL WINDOW -->
-<div id="priceModal" class="modal" onclick="closePriceModalOutside(event)">
+<div id="priceModal" class="modal" onclick="closePriceModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
         <span class="close-btn" onclick="closePriceModal()">&times;</span>
-        <h2 id="modalItemName" style="color:#28a745; margin-top:0;">Furniture Item</h2>
-        <p style="text-align:center; font-size:12px; color:#666; margin-top:-5px;">Official Workshop Price Estimate</p>
-        
-        <div class="price-box">
-            <p style="margin:0; font-weight:bold; color:#555; font-size:14px;">Estimated Base Cost</p>
-            <div class="price-value" id="modalItemPrice">$0.00</div>
-            <p style="margin:5px 0 0 0; font-size:11px; color:#666;">*Final quote depends on dimensions & material choice</p>
-        </div>
-
-        <ul class="details-list">
-            <li class="details-item"><strong>Category Type:</strong> <span id="modalItemCategory">-</span></li>
-            <li class="details-item"><strong>Standard Turnaround:</strong> <span id="modalItemTime">-</span></li>
-            <li class="details-item"><strong>Available Woods:</strong> <span>Oak, Walnut, Beech, Pine</span></li>
-            <li class="details-item"><strong>Craftsman:</strong> <span>Elie (03174225)</span></li>
-        </ul>
-
-        <a href="tel:+96103174225" class="modal-action-btn">📞 Call to Confirm Order</a>
-    </div>
-</div>
-
-<!-- ROBUST MOBILE SCRIPTS -->
-<script>
-function filterGallery(category) {
-    // Tab switching code built specifically for mobile browser targets
-    let buttons = document.getElementsByClassName('filter-btn');
-    for (let i = 0; i < buttons.length; i++) {
-        buttons[i].classList.remove('active');
-    }
-    
