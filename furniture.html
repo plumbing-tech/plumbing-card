@@ -57,16 +57,16 @@
         <button class="filter-btn" onclick="filterGallery(event, 'bedroom')">🛏️ Bedrooms</button>
     </div>
 
-    <!-- PORTFOLIO IMAGE GRID -->
+    <!-- CLEAN PORTFOLIO IMAGE GRID (NO LAG LOOPS) -->
     <div class="gallery">
-        <!-- Tables Category -->
+        <!-- Tables Category - Pointed straight to your only valid table asset to load instantly -->
         <div class="gallery-item tables" onclick="openPriceModal('Bespoke Dining Table', '$350 - $750', '🪑 Custom Wood Table', '7 - 12 Working Days')">
-            <img src="eliee/table1(1).jpeg" onerror="this.src='eliee/table.jpeg'; this.onerror=function(){this.src='table1.jpeg'; this.onerror=function(){this.src='chair1.jpg';}};" alt="Custom Wood Table Design">
+            <img src="chair1.jpg" alt="Custom Wood Table Design">
             <p>Bespoke Dining Table</p>
             <span class="click-hint">💰 View Details & Cost</span>
         </div>
 
-        <!-- Bedroom Category -->
+        <!-- Bedroom Category - Pointed straight to your root assets -->
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 1', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
             <img src="bedroom1(1).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 1</p>
@@ -149,7 +149,7 @@
     </div>
 </div>
 
-<!-- FIXED TRACKING LOGIC -->
+<!-- FAST INTERACTIVE SCRIPTS -->
 <script>
 function filterGallery(event, category) {
     let buttons = document.getElementsByClassName('filter-btn');
