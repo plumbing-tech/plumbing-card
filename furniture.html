@@ -2,23 +2,30 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elie's Custom Furniture</title>
+    <title>Elie's Custom Furniture & Carpentry</title>
     <style>
         body { font-family: Arial, sans-serif; background: #fbf8f5; padding: 20px; color: #333; }
         .container { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-top: 8px solid #8b5a2b; }
         h1, h2 { color: #8b5a2b; text-align: center; }
         p.subtitle { text-align: center; margin-top: -10px; color: #666; font-style: italic; }
+        
+        /* Category Filter Tabs */
         .filter-container { display: flex; justify-content: center; gap: 8px; margin: 20px 0; flex-wrap: wrap; }
         .filter-btn { background: #e9ecef; border: none; padding: 8px 16px; border-radius: 20px; font-weight: bold; cursor: pointer; color: #555; transition: 0.2s; }
         .filter-btn.active, .filter-btn:hover { background: #8b5a2b; color: white; }
+        
+        /* Gallery Styles */
         .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
         .gallery-item { display: block; text-decoration: none; color: inherit; cursor: pointer; transition: transform 0.2s; }
         .gallery-item:hover { transform: scale(1.02); }
         .gallery-item img { width: 100%; border-radius: 8px; border: 1px solid #ddd; height: 150px; object-fit: cover; display: block; }
         .gallery-item p { text-align: center; margin: 5px 0 10px 0; font-size: 13px; font-weight: bold; color: #555; }
         .click-hint { font-size: 11px; color: #28a745; display: block; text-align: center; margin-top: -8px; margin-bottom: 8px; font-weight: normal; }
+        
         .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
         .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
+
+        /* POPUP PRICE BOX MODAL WINDOW */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); padding: 20px; box-sizing: border-box; }
         .modal-content { background-color: white; margin: 15% auto; padding: 25px; border-radius: 15px; max-width: 450px; border-top: 8px solid #28a745; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
         .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; margin-top: -15px; }
@@ -37,44 +44,81 @@
     <p class="subtitle">Handcrafted Woodworking & Carpentry Specialist</p>
     <hr style="border: 0; border-top: 1px solid #ddd; margin: 20px 0;">
     
+    <!-- COMM-LINKS -->
     <a href="tel:+96103174225" class="action-btn">📞 Call Elie For Orders</a>
     <a href="sms:+96103174225" class="action-btn" style="background: #007bff;">💬 Text Elie Details</a>
 
     <h2>Our Work Gallery</h2>
     
+    <!-- CATEGORY FILTERS -->
     <div class="filter-container">
         <button class="filter-btn active" onclick="filterGallery(event, 'all')">✨ All</button>
         <button class="filter-btn" onclick="filterGallery(event, 'tables')">🪑 Tables</button>
         <button class="filter-btn" onclick="filterGallery(event, 'bedroom')">🛏️ Bedrooms</button>
     </div>
 
+    <!-- MAIN COMPREHENSIVE IMAGE PORTFOLIO GRID -->
     <div class="gallery">
         <!-- Tables Category -->
         <div class="gallery-item tables" onclick="openPriceModal('Bespoke Table 1', '$350 - $750', '🪑 Custom Wood Table', '7 - 12 Working Days')">
-            <img src="table1(1).jpeg" onerror="this.src='eliee/table1(1).jpeg'; this.onerror=function(){this.src='table.jpeg'; this.onerror=function(){this.src='eliee/table.jpeg';}};" alt="Custom Table">
-            <p>Bespoke Table 1</p>
+            <img src="chair1.jpg" onerror="this.src='table1.jpeg';" alt="Custom Carpentry Setup">
+            <p>Bespoke Carpentry Work</p>
             <span class="click-hint">💰 View Est. Cost</span>
         </div>
 
-        <!-- Bedroom Category - Programmed to search both direct strings and subfolder mutations natively -->
+        <!-- Bedroom Category (Every item linked straight to your layout screen) -->
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 1', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-            <img src="bedroom1(1).jpeg" onerror="this.src='eliee/bedroom1(1).jpeg';" alt="Bedroom Furniture">
+            <img src="bedroom1(1).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 1</p>
             <span class="click-hint">💰 View Est. Cost</span>
         </div>
+        
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 2', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-            <img src="bedroom1(3).jpeg" onerror="this.src='eliee/bedroom1(3).jpeg';" alt="Bedroom Furniture">
+            <!-- Tries .jpeg and has an auto fallback loop to grab the broken .jpe line extension link -->
+            <img src="bedroom1(3).jpeg" onerror="this.src='bedroom1(3).jpe';" alt="Bedroom Furniture">
             <p>Master Bedroom Set 2</p>
             <span class="click-hint">💰 View Est. Cost</span>
         </div>
+
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 3', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-            <img src="bedroom1(4).jpeg" onerror="this.src='eliee/bedroom1(4).jpeg';" alt="Bedroom Furniture">
+            <img src="bedroom1(4).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 3</p>
             <span class="click-hint">💰 View Est. Cost</span>
         </div>
+
         <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 4', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-            <img src="bedroom1(5).jpeg" onerror="this.src='eliee/bedroom1(5).jpeg';" alt="Bedroom Furniture">
+            <img src="bedroom1(5).jpeg" alt="Bedroom Furniture">
             <p>Master Bedroom Set 4</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </div>
+
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 5', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
+            <img src="bedroom1(6).jpeg" alt="Bedroom Furniture">
+            <p>Master Bedroom Set 5</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </div>
+
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 6', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
+            <img src="bedroom1(7).jpeg" alt="Bedroom Furniture">
+            <p>Master Bedroom Set 6</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </div>
+
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 7', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
+            <img src="bedroom1(8).jpeg" alt="Bedroom Furniture">
+            <p>Master Bedroom Set 7</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </div>
+
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 8', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
+            <img src="bedroom1(9).jpeg" alt="Bedroom Furniture">
+            <p>Master Bedroom Set 8</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </div>
+
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 9', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
+            <img src="bedroom1(10).jpeg" alt="Bedroom Furniture">
+            <p>Master Bedroom Set 9</p>
             <span class="click-hint">💰 View Est. Cost</span>
         </div>
     </div>
@@ -82,44 +126,36 @@
     <a href="index.html" class="btn-back">⬅️ Back to Main Gateway</a>
 </div>
 
+<!-- POPUP PRICE BOX MODAL WINDOW -->
 <div id="priceModal" class="modal">
     <div class="modal-content">
         <span class="close-btn" onclick="closePriceModal()">&times;</span>
         <h2 id="modalItemName" style="color:#28a745; margin-top:0;">Furniture Item</h2>
+        <p style="text-align:center; font-size:12px; color:#666; margin-top:-5px;">Official Workshop Price Estimate</p>
+        
         <div class="price-box">
+            <p style="margin:0; font-weight:bold; color:#555; font-size:14px;">Estimated Base Cost</p>
             <div class="price-value" id="modalItemPrice">$0.00</div>
+            <p style="margin:5px 0 0 0; font-size:11px; color:#666;">*Final quote depends on dimensions & material choice</p>
         </div>
+
         <ul class="details-list">
-            <li class="details-item"><strong>Category:</strong> <span id="modalItemCategory">-</span></li>
-            <li class="details-item"><strong>Timeframe:</strong> <span id="modalItemTime">-</span></li>
+            <li class="details-item"><strong>Category Type:</strong> <span id="modalItemCategory">-</span></li>
+            <li class="details-item"><strong>Standard Turnaround:</strong> <span id="modalItemTime">-</span></li>
+            <li class="details-item"><strong>Available Woods:</strong> <span>Oak, Walnut, Beech, Pine</span></li>
+            <li class="details-item"><strong>Craftsman:</strong> <span>Elie (03174225)</span></li>
         </ul>
-        <a href="tel:+96103174225" class="modal-action-btn">📞 Call to Confirm</a>
+
+        <a href="tel:+96103174225" class="modal-action-btn">📞 Call to Confirm Order</a>
     </div>
 </div>
 
+<!-- SCRIPTS -->
 <script>
 function filterGallery(evt, category) {
     let buttons = document.getElementsByClassName('filter-btn');
     for (let button of buttons) { button.classList.remove('active'); }
     evt.currentTarget.classList.add('active');
+
     let items = document.getElementsByClassName('gallery-item');
     for (let item of items) {
-        if (category === 'all' || item.classList.contains(category)) { item.style.display = 'block'; }
-        else { item.style.display = 'none'; }
-    }
-}
-function openPriceModal(name, price, category, time) {
-    document.getElementById('modalItemName').innerText = name;
-    document.getElementById('modalItemPrice').innerText = price;
-    document.getElementById('modalItemCategory').innerText = category;
-    document.getElementById('modalItemTime').innerText = time;
-    document.getElementById('priceModal').style.display = "block";
-}
-function closePriceModal() { document.getElementById('priceModal').style.display = "none"; }
-window.onclick = function(event) {
-    let modal = document.getElementById('priceModal');
-    if (event.target == modal) { modal.style.display = "none"; }
-}
-</script>
-</body>
-</html>
