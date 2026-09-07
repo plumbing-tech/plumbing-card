@@ -13,15 +13,26 @@
         .folder-title { font-weight: bold; font-size: 18px; color: #8b5a2b; display: block; margin-bottom: 8px; }
         .click-hint { font-size: 13px; color: #777; background: #f5eae0; padding: 4px 10px; border-radius: 20px; display: inline-block; }
         
-        /* Interactive Popup Styles */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.75); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+        /* Modal Window Core Layout */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        .modal-window { background: white; padding: 25px; border-radius: 15px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; transform: scale(0.8); transition: transform 0.3s ease; }
+        .modal-window { background: white; padding: 25px; border-radius: 15px; max-width: 700px; width: 90%; max-height: 85vh; overflow-y: auto; position: relative; transform: scale(0.8); transition: transform 0.3s ease; text-align: left; }
         .modal-overlay.active .modal-window { transform: scale(1); }
         .close-btn { position: absolute; top: 10px; right: 15px; font-size: 28px; background: none; border: none; cursor: pointer; color: #333; }
         .modal-title { margin-top: 0; border-bottom: 2px solid #8b5a2b; padding-bottom: 10px; text-transform: capitalize; color: #8b5a2b; }
-        .modal-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 15px; }
-        .modal-gallery img { width: 100%; height: 130px; object-fit: cover; border-radius: 8px; border: 1px solid #ddd; }
+        
+        /* Grid displaying the folder contents */
+        .modal-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px; margin-top: 15px; }
+        .img-card { background: #fafafa; border: 1px solid #ddd; padding: 8px; border-radius: 8px; text-align: center; cursor: pointer; transition: transform 0.2s; }
+        .img-card:hover { transform: scale(1.03); box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .modal-gallery img { width: 100%; height: 130px; object-fit: cover; border-radius: 6px; }
+        .img-caption { font-size: 12px; color: #555; margin-top: 5px; font-weight: bold; display: block; }
+
+        /* Secondary detail modal window view layer */
+        #detailModal .modal-window { max-width: 500px; text-align: center; }
+        #detailImage { width: 100%; max-height: 350px; object-fit: contain; border-radius: 8px; margin-bottom: 15px; }
+        .detail-desc { font-size: 16px; color: #444; line-height: 1.5; padding: 0 10px; }
+        .back-btn { margin-top: 25px; display: inline-block; background: #8b5a2b; color: white; padding: 10px 20px; text-decoration: none; border-radius: 6px; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -30,75 +41,109 @@
 
     <div class="gallery-grid">
         <div class="gallery-item" onclick="openFolder('bedroom')">
-            <span class="folder-title">🛏️ Master Bedroom Set 6</span>
-            <span class="click-hint">Tap to view images</span>
+            <span class="folder-title">🛏️ Master Bedroom Folder</span>
+            <span class="click-hint">Tap to open folder items</span>
         </div>
 
         <div class="gallery-item" onclick="openFolder('table')">
-            <span class="folder-title">🪑 Custom Dining Tables</span>
-            <span class="click-hint">Tap to view images</span>
+            <span class="folder-title">🪑 Custom Dining Tables Folder</span>
+            <span class="click-hint">Tap to open folder items</span>
         </div>
 
         <div class="gallery-item" onclick="openFolder('tv')">
-            <span class="folder-title">📺 TV Units & Lounges</span>
-            <span class="click-hint">Tap to view images</span>
+            <span class="folder-title">📺 TV Units & Lounges Folder</span>
+            <span class="click-hint">Tap to open folder items</span>
         </div>
     </div>
 
-    <!-- The Popup Modal Element Box -->
+    <!-- MAIN GALLERY POPUP -->
     <div class="modal-overlay" id="galleryModal" onclick="closeFolder()">
         <div class="modal-window" onclick="event.stopPropagation()">
             <button class="close-btn" onclick="closeFolder()">&times;</button>
-            <h3 class="modal-title" id="modalTitle">Gallery</h3>
+            <h3 class="modal-title" id="modalTitle">Folder Gallery</h3>
             <div class="modal-gallery" id="modalImages"></div>
         </div>
     </div>
 
+    <!-- DETAIL PICTURE SCREEN WINDOW -->
+    <div class="modal-overlay" id="detailModal" onclick="closeDetail()">
+        <div class="modal-window" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeDetail()">&times;</button>
+            <h3 class="modal-title" id="detailTitle">Item Detail View</h3>
+            <img id="detailImage" src="" alt="Selected product profile picture">
+            <p class="detail-desc" id="detailDescription"></p>
+        </div>
+    </div>
+
+    <p><a href="index.html" class="back-btn">➔ Back to Home Gateway</a></p>
+
     <script>
-        // Mapping paths manually to prevent GitHub Pages folder lookup errors
+        // Folder contents mapping matching your exact system files structure
         const folderDatabase = {
             'bedroom': [
-                'elee/bedroom(10).jpeg',
-                'elee/bedroom(11).jpeg',
-                'elee/bedroom(12).jpeg'
+                { src: 'elee/bedroom(10).jpeg', name: 'Premium Bedroom Set Style 10', desc: 'Bespoke custom master suite layout featuring integrated wooden frame profiling and custom architectural assembly details.' },
+                { src: 'elee/bedroom(11).jpeg', name: 'Premium Bedroom Set Style 11', desc: 'Handcrafted luxury bedroom structure made from high-end select timber, optimizing space configurations gracefully.' },
+                { src: 'elee/bedroom(12).jpeg', name: 'Premium Bedroom Set Style 12', desc: 'Modern architectural carpentry layout with clean joints, elegant framing, and integrated soft-close design components.' }
             ],
             'table': [
-                'table/table(1).jpeg',
-                'table/table(2).jpeg',
-                'table/table(3).jpeg'
+                { src: 'table/table(1).jpeg', name: 'Custom Dining Table Style 1', desc: 'Elegant dining area center piece built with solid lumber planks, finished with clear protective coatings.' },
+                { src: 'table/table(2).jpeg', name: 'Custom Dining Table Style 2', desc: 'Industrial blend modern dining assembly framework built to fit custom residential dimension specifications.' },
+                { src: 'table/table(3).jpeg', name: 'Custom Dining Table Style 3', desc: 'Luxury rustic carpentry detailing showcasing unique timber wood grain patterns and robust perimeter edge construction.' }
             ],
             'tv': [
-                'tv/unit(1).jpg',
-                'tv/unit(2).jpg'
+                { src: 'tv/tvunit(1).jpg', name: 'Modern TV Wall Assembly 1', desc: 'Floating media console featuring cable routing slots and smooth touch-latch cabinet openings.' }
             ]
         };
 
+        // Window opening handlers
         function openFolder(folderName) {
             const modal = document.getElementById('galleryModal');
             const titleElement = document.getElementById('modalTitle');
             const imagesContainer = document.getElementById('modalImages');
 
-            titleElement.innerText = folderName + " Catalog";
+            titleElement.innerText = folderName.toUpperCase() + " Directory Assets";
             imagesContainer.innerHTML = '';
 
-            const activeImages = folderDatabase[folderName];
+            const folderItems = folderDatabase[folderName];
 
-            if (activeImages && activeImages.length > 0) {
-                activeImages.forEach(imagePath => {
+            if (folderItems && folderItems.length > 0) {
+                folderItems.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'img-card';
+                    card.onclick = () => showItemDetail(item.src, item.name, item.desc);
+
                     const img = document.createElement('img');
-                    img.src = imagePath;
-                    img.alt = folderName + " design";
-                    img.onerror = function() { this.style.display = 'none'; };
-                    imagesContainer.appendChild(img);
+                    img.src = item.src;
+                    img.alt = item.name;
+                    img.onerror = function() { this.parentElement.style.display = 'none'; };
+
+                    const caption = document.createElement('span');
+                    caption.className = 'img-caption';
+                    caption.innerText = item.name;
+
+                    card.appendChild(img);
+                    card.appendChild(caption);
+                    imagesContainer.appendChild(card);
                 });
             } else {
-                imagesContainer.innerHTML = '<p>No image items found.</p>';
+                imagesContainer.innerHTML = '<p style="padding:10px;">No folder items found inside this directory system path layout yet.</p>';
             }
             modal.classList.add('active');
         }
 
+        function showItemDetail(src, name, desc) {
+            document.getElementById('detailTitle').innerText = name;
+            document.getElementById('detailImage').src = src;
+            document.getElementById('detailDescription').innerText = desc;
+            document.getElementById('detailModal').classList.add('active');
+        }
+
         function closeFolder() {
             document.getElementById('galleryModal').classList.remove('active');
+        }
+
+        function closeDetail() {
+            document.getElementById('detailModal').classList.remove('active');
         }
     </script>
 </body>
