@@ -25,7 +25,7 @@
         .action-btn { display: block; text-align: center; background: #8b5a2b; color: white; padding: 14px; margin: 12px 0; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px; }
         .btn-back { display: block; text-align: center; background: #6c757d; color: white; padding: 12px; margin-top: 25px; text-decoration: none; border-radius: 8px; font-weight: bold; }
 
-        /* POPUP WINDOW STYLES (MODAL) */
+        /* POPUP PRICE BOX MODAL WINDOW */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); padding: 20px; box-sizing: border-box; }
         .modal-content { background-color: white; margin: 15% auto; padding: 25px; border-radius: 15px; max-width: 450px; border-top: 8px solid #28a745; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
         .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; margin-top: -15px; }
@@ -59,17 +59,35 @@
 
     <!-- PHOTO GALLERY GRID -->
     <div class="gallery">
-        <!-- Tables Category - Triggers popup onclick instantly -->
+        <!-- Tables Category -->
         <div class="gallery-item tables" onclick="openPriceModal('Bespoke Table', '$350 - $750', '🪑 Custom Wood Table', '7 - 12 Working Days')">
-            <img src="table.jpeg" alt="Custom Table">
+            <img src="eliee/table.jpeg" onerror="this.src='eliee/table1.jpeg';" alt="Custom Table">
             <p>Bespoke Table</p>
             <span class="click-hint">💰 View Est. Cost</span>
         </div>
 
-        <!-- Bedroom Category - Triggers popup onclick instantly -->
-        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
-            <img src="bedroom.jpeg" alt="Bedroom Furniture">
-            <p>Custom Bedroom Set</p>
+        <!-- Bedroom Category (Now routed perfectly to your eliee/ directory names) -->
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 1', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
+            <img src="eliee/bedroom1(1).jpeg" alt="Bedroom Furniture">
+            <p>Master Bedroom Set 1</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </div>
+        
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 2', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
+            <img src="eliee/bedroom1(3).jpeg" alt="Bedroom Furniture">
+            <p>Master Bedroom Set 2</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </div>
+
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 3', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
+            <img src="eliee/bedroom1(4).jpeg" alt="Bedroom Furniture">
+            <p>Master Bedroom Set 3</p>
+            <span class="click-hint">💰 View Est. Cost</span>
+        </div>
+
+        <div class="gallery-item bedroom" onclick="openPriceModal('Custom Bedroom Set 4', '$1,200 - $3,500', '🛏️ Premium Bedroom Joinery', '21 - 30 Working Days')">
+            <img src="eliee/bedroom1(5).jpeg" alt="Bedroom Furniture">
+            <p>Master Bedroom Set 4</p>
             <span class="click-hint">💰 View Est. Cost</span>
         </div>
     </div>
@@ -102,9 +120,8 @@
     </div>
 </div>
 
-<!-- ALL SCRIPTS (FILTERING & INTERACTIVE POPUPS) -->
+<!-- ALL SCRIPTS -->
 <script>
-// Filter functions
 function filterGallery(evt, category) {
     let buttons = document.getElementsByClassName('filter-btn');
     for (let button of buttons) {
@@ -124,16 +141,12 @@ function filterGallery(evt, category) {
     }
 }
 
-// Instant popup pricing mechanics
 function openPriceModal(name, price, category, time) {
     document.getElementById('modalItemName').innerText = name;
     document.getElementById('modalItemPrice').innerText = price;
     document.getElementById('modalItemCategory').innerText = category;
     document.getElementById('modalItemTime').innerText = time;
-    
-    // Auto fill SMS details text string
     document.getElementById('modalSmsLink').href = "sms:+96103174225?body=Hi Elie, I am interested in getting a quote for the " + name;
-    
     document.getElementById('priceModal').style.display = "block";
 }
 
@@ -141,7 +154,6 @@ function closePriceModal() {
     document.getElementById('priceModal').style.display = "none";
 }
 
-// Close the modal screen window if user clicks outside of the card box anywhere on screen
 window.onclick = function(event) {
     let modal = document.getElementById('priceModal');
     if (event.target == modal) {
