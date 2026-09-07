@@ -48,7 +48,7 @@
         <!-- 1. MASTER BEDROOM SECTION -->
         <div class="section-heading">🛏️ Custom Master Bedroom Sets</div>
         <div class="furniture-grid">
-            <div class="furniture-card" onclick="viewAsset('bedroom(1).jpeg', 'Master Bedroom Set (1)', 'Bespoke custom master suite layout featuring integrated wooden frame profiling and custom architectural assembly details.')">
+            <div class="furniture-card" onclick="viewAsset('bedroom(1).jpeg', 'Master Bedroom Set (1)', 'Bespoke custom master suite layout featuring integrated wooden frame profiling.')">
                 <div class="image-wrapper"><img src="bedroom(1).jpeg"></div>
                 <div class="card-details">
                     <span class="item-tag">Bedroom</span>
@@ -57,7 +57,7 @@
                 </div>
             </div>
 
-            <div class="furniture-card" onclick="viewAsset('bedroom(10).jpeg', 'Master Bedroom Set (10)', 'Handcrafted luxury bedroom structure made from high-end select timber, optimizing space configurations gracefully.')">
+            <div class="furniture-card" onclick="viewAsset('bedroom(10).jpeg', 'Master Bedroom Set (10)', 'Handcrafted luxury bedroom structure made from high-end select timber.')">
                 <div class="image-wrapper"><img src="bedroom(10).jpeg"></div>
                 <div class="card-details">
                     <span class="item-tag">Bedroom</span>
@@ -66,7 +66,7 @@
                 </div>
             </div>
             
-            <div class="furniture-card" onclick="viewAsset('bedroom(11).jpeg', 'Master Bedroom Set (11)', 'Modern architectural carpentry layout with clean joints, elegant framing, and integrated soft-close design components.')">
+            <div class="furniture-card" onclick="viewAsset('bedroom(11).jpeg', 'Master Bedroom Set (11)', 'Modern architectural carpentry layout with clean joints.')">
                 <div class="image-wrapper"><img src="bedroom(11).jpeg"></div>
                 <div class="card-details">
                     <span class="item-tag">Bedroom</span>
@@ -75,7 +75,7 @@
                 </div>
             </div>
 
-            <div class="furniture-card" onclick="viewAsset('bedroom(12).jpeg', 'Master Bedroom Set (12)', 'Premium master wood setup with custom storage configurations.')">
+            <div class="furniture-card" onclick="viewAsset('bedroom(12).jpeg', 'Master Bedroom Set (12)', 'Premium master wood setup with custom configurations.')">
                 <div class="image-wrapper"><img src="bedroom(12).jpeg"></div>
                 <div class="card-details">
                     <span class="item-tag">Bedroom</span>
@@ -88,8 +88,9 @@
         <!-- 2. DINING TABLES SECTION -->
         <div class="section-heading">🪑 Custom Dining Tables</div>
         <div class="furniture-grid">
-            <div class="furniture-card" onclick="viewAsset('table(1).jpg', 'Bespoke Table Set (1)', 'Elegant dining area centerpiece built with solid lumber planks, finished with clear protective coatings.')">
-                <div class="image-wrapper"><img src="table(1).jpg"></div>
+            <!-- Fixed extension case to match your table(1).JPG file exactly -->
+            <div class="furniture-card" onclick="viewAsset('table(1).JPG', 'Bespoke Table Set (1)', 'Elegant dining area centerpiece built with solid lumber planks.')">
+                <div class="image-wrapper"><img src="table(1).JPG"></div>
                 <div class="card-details">
                     <span class="item-tag">Dining</span>
                     <p class="item-title">Bespoke Table Set (1)</p>
@@ -97,7 +98,8 @@
                 </div>
             </div>
 
-            <div class="furniture-card" onclick="viewAsset('table(11).jpeg', 'Bespoke Table Set (11)', 'Industrial blend modern dining assembly framework built to fit custom residential dimension specifications.')">
+            <!-- Fixed typo extension from table(11).jpe to table(11).jpeg -->
+            <div class="furniture-card" onclick="viewAsset('table(11).jpeg', 'Bespoke Table Set (11)', 'Industrial blend modern dining assembly framework.')">
                 <div class="image-wrapper"><img src="table(11).jpeg"></div>
                 <div class="card-details">
                     <span class="item-tag">Dining</span>
@@ -106,8 +108,9 @@
                 </div>
             </div>
 
-            <div class="furniture-card" onclick="viewAsset('table(12).jpg', 'Bespoke Table Set (12)', 'Luxury rustic carpentry detailing showcasing unique timber wood grain patterns and robust perimeter edge construction.')">
-                <div class="image-wrapper"><img src="table(12).jpg"></div>
+            <!-- Fixed extension case to match your table(12).JPG file exactly -->
+            <div class="furniture-card" onclick="viewAsset('table(12).JPG', 'Bespoke Table Set (12)', 'Luxury rustic carpentry detailing showcasing unique timber wood grains.')">
+                <div class="image-wrapper"><img src="table(12).JPG"></div>
                 <div class="card-details">
                     <span class="item-tag">Dining</span>
                     <p class="item-title">Bespoke Table Set (12)</p>
@@ -119,8 +122,8 @@
         <!-- 3. TV UNITS SECTION -->
         <div class="section-heading">📺 Architectural TV Units & Lounges</div>
         <div class="furniture-grid">
-            <!-- Named exactly tvunite1.jpg to match your file spelling typo from the video -->
-            <div class="furniture-card" onclick="viewAsset('tvunite1.jpg', 'Modern TV Assembly (1)', 'Floating media console featuring integrated cable routing slots and sleek geometric touch-latch storage options.')">
+            <!-- Linked exactly to tvunite1.jpg to match your repository spelling -->
+            <div class="furniture-card" onclick="viewAsset('tvunite1.jpg', 'Modern TV Assembly (1)', 'Floating media console featuring integrated cable routing slots.')">
                 <div class="image-wrapper"><img src="tvunite1.jpg"></div>
                 <div class="card-details">
                     <span class="item-tag">Living Room</span>
@@ -155,3 +158,8 @@
         }
 
         function closeAsset() {
+            document.getElementById('assetViewer').classList.remove('active');
+        }
+    </script>
+</body>
+</html>
